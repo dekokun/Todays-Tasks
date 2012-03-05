@@ -8,8 +8,16 @@ div
     - })
 
 div
+  h2 新規Task
   form(action='/', method= 'POST')
-    input(name= 'title')
-    input(name= 'description')
-    input(name= 'url')
+    dl
+      dt タスク名
+      dd
+        input(name= 'title')
+      dt 説明
+      dd
+        input(name= 'description')
+      dt URL
+      dd
+        input(name= 'url')
     input(type= 'submit')
