@@ -6,8 +6,11 @@ article
     ul
       - tasks.forEach(function(task){
         li
-          a(href= task.url)= task.title
-          p= task.description
+          form(action='/task/'+task._id, method= 'POST')
+            a(href= task.url)= task.title
+            p= task.description
+            input(type='hidden', name='_method', value='delete')
+            input(type= 'submit', value='削除')
       - })
 
   section

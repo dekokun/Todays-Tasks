@@ -47,9 +47,11 @@
 
   app.get("/", routes.index);
 
-  app.get("/tasks", routes.tasks(Tasks));
+  app.get("/task", routes.tasks(Tasks));
 
-  app.post("/", routes.add_task(Tasks));
+  app.post("/task", routes.add_task(Tasks));
+
+  app.del("/task/:id", routes.del_task(Tasks));
 
   app.listen(443);
 
