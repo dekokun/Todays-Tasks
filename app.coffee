@@ -28,8 +28,8 @@ Tasks = mongoose.model 'Tasks'
 
 
 app.get "/", routes.index
-app.get "/tasks", routes.tasks(Tasks)
-app.post "/", routes.add_task(Tasks)
+app.get "/task", routes.tasks(Tasks)
+app.post "/task", routes.add_task(Tasks)
 
 app.listen 443
 console.log "Express server listening on port %d in %s mode", app.address().port, app.settings.env
