@@ -1,15 +1,20 @@
 (function() {
 
-  exports.index = function(req, res) {
-    return res.render("index", {
-      title: "Todays tasks"
-    });
+  exports.index = function(collection) {
+    return function(req, res) {
+      return collection.find({}, function(err, tasks) {
+        return res.render('task', {
+          tasks: tasks,
+          title: 'Todays Tasks'
+        });
+      });
+    };
   };
 
   exports.tasks = function(collection) {
     return function(req, res) {
       return collection.find({}, function(err, tasks) {
-        return res.render('tasks', {
+        return res.render('task', {
           tasks: tasks,
           title: 'Tasks'
         });

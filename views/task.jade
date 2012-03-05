@@ -3,15 +3,7 @@ article
     h1= title
   section
     h2 Task一覧
-    ul
-      - tasks.forEach(function(task){
-        li
-          form(action='/task/'+task._id, method= 'POST')
-            a(href= task.url)= task.title
-            p= task.description
-            input(type='hidden', name='_method', value='delete')
-            input(type= 'submit', value='削除')
-      - })
+    ul!= partial('_task_list', tasks)
 
   section
     h2 新規Task

@@ -45,7 +45,7 @@
 
   Tasks = mongoose.model('Tasks');
 
-  app.get("/", routes.index);
+  app.get("/", routes.index(Tasks));
 
   app.get("/task", routes.tasks(Tasks));
 
