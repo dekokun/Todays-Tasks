@@ -3,7 +3,8 @@ article
     h1= title
   section
     h2 Task一覧
-    ul!= partial('_task_list', tasks)
+  ul
+    li!= partial('_task_list', tasks)
 
   section
     h2 新規Task

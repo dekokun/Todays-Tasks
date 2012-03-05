@@ -1,0 +1,8 @@
+article
+  header
+    h1= title
+  section
+    h2 チェックリスト
+    form(action='/task/'+task._id, method= 'POST')
+      ul!= partial('_check_list', tasks)
+
