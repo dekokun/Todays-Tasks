@@ -1,5 +1,5 @@
 (function() {
-  var app, express, routes;
+  var Tasks, app, express, mongoose, routes;
 
   express = require("express");
 
@@ -31,7 +31,25 @@
     return app.use(express.errorHandler());
   });
 
+  mongoose = require('mongoose');
+
+  mongoose.connect('mongodb://localhost/everydaystasks');
+
+  Tasks = new mongoose.Schema({
+    title: String,
+    description: String,
+    url: String
+  });
+
+  mongoose.model('Tasks', Tasks);
+
+  Tasks = mongoose.model('Tasks');
+
   app.get("/", routes.index);
+
+  app.get("/tasks", routes.tasks(Tasks));
+
+  app.post("/", routes.add_task(Tasks));
 
   app.listen(443);
 

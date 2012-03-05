@@ -1,0 +1,15 @@
+h1= title
+div
+  ul
+    - tasks.forEach(function(task){
+      li
+        a(href= task.url)= task.title
+        p= task.description
+    - })
+
+div
+  form(action='/', method= 'POST')
+    input(name= 'title')
+    input(name= 'description')
+    input(name= 'url')
+    input(type= 'submit')
