@@ -1,26 +1,29 @@
-h1= title
-div
-  ul
-    - tasks.forEach(function(task){
-      li
-        a(href= task.url)= task.title
-        p= task.description
-    - })
+article
+  header
+    h1= title
+  section
+    h2 Task一覧
+    ul
+      - tasks.forEach(function(task){
+        li
+          a(href= task.url)= task.title
+          p= task.description
+      - })
 
-div
-  h2 新規Task
-  form(action='/', method= 'POST')
-    dl
-      dt タスク名
-      dd
-        input(name= 'title')
-      dt 説明
-      dd
-        input(name= 'description')
-      dt URL
-      dd
-        input(name= 'url')
-    input(type= 'submit')
+  section
+    h2 新規Task
+    form(action='/', method= 'POST')
+      dl
+        dt タスク名
+        dd
+          input(name= 'title')
+        dt 説明
+        dd
+          input(name= 'description')
+        dt URL
+        dd
+          input(name= 'url')
+      input(type= 'submit')
 
-divfooter
-  a(href '/') メインページ
+  footer
+    a(href '/') メインページ
