@@ -1,7 +1,7 @@
 exports.index = (collection) ->
   (req, res) ->
     collection.find({}, (err, tasks) ->
-      res.render('task', {
+      res.render('check', {
         tasks: tasks,
         title: 'Todays Tasks'
       })
