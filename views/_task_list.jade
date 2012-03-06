@@ -1,5 +1,0 @@
-a(href= tasks[indexInCollection].url)= tasks[indexInCollection].title
-form(action='/tasks/'+tasks[indexInCollection]._id, method= 'POST')
-  input(type='hidden', name='_method', value='delete')
-  input(type= 'submit', value='削除')
-p= tasks[indexInCollection].description
