@@ -9,6 +9,12 @@ case $1 in
     git checkout $MASTER_BRANCH || exit 1
     git merge $DEVELOP_BRANCH || exit 1
     open -a Firefox $DEVELOP_URL
+    echo "ブランチを$DEVELOP_BRANCHに戻しますか y/n"
+    read ANSWER
+    if [ $ANSWER = 'y' ]; then
+      git checkout $DEVELOP_BRANCH
+      echo "ブランチを$DEVELOP_BRANCHに戻しました y/n"
+    fi
     ;;
   deploy)
     git push origin $MASTER_BRANCH || exit 1
