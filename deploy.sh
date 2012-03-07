@@ -1,15 +1,18 @@
+DEVELOP_URL=http://127.0.0.1:5001/
+PRODUCT_URL=http://10.128.32.112:443/
+
 case $1 in
   merge)
     git checkout master || exit 1
     git merge development || exit 1
-    open -a Firefox http://127.0.0.1:5001/
+    open -a Firefox $DEVELOP_URL
     ;;
   deploy)
     git push origin master || exit 1
-    open -a Firefox http://10.128.32.112:443/
+    open -a Firefox $PRODUCT_URL
     ;;
   test)
-    open -a Firefox http://127.0.0.1:5001/
+    open -a Firefox $DEVELOP_URL
     ;;
   develop)
     git checkout development || exit 1
