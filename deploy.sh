@@ -1,21 +1,24 @@
 DEVELOP_URL=http://127.0.0.1:5001/
 PRODUCT_URL=http://10.128.32.112:443/
+NOW_BRANCH=`cat .git/HEAD | cut -d'/' -f3`
+DEVELOP_BRANCH=development
+MASTER_BRANCH=master
 
 case $1 in
   merge)
-    git checkout master || exit 1
-    git merge development || exit 1
+    git checkout $MASTER_BRANCH || exit 1
+    git merge $DEVELOP_BRANCH || exit 1
     open -a Firefox $DEVELOP_URL
     ;;
   deploy)
-    git push origin master || exit 1
+    git push origin $MASTER_BRANCH || exit 1
     open -a Firefox $PRODUCT_URL
     ;;
   test)
     open -a Firefox $DEVELOP_URL
     ;;
   develop)
-    git checkout development || exit 1
+    git checkout $DEVELOP_BRANCH || exit 1
     coffee -wc app.coffee &
     coffee -wc routes/ &
     coffee -wc public/javascript/ &
