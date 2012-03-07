@@ -1,5 +1,6 @@
-a(href= task.url)= task.title
-form(action='/task/'+task._id, method= 'POST')
-  input(type='hidden', name='_method', value='delete')
-  input(type= 'submit', value='削除')
-p= task.description
+li
+  a(href= task.url)= task.title
+  form(action='/task/'+task._id, method= 'POST')
+    input(type='hidden', name='_method', value='delete')
+    input(type= 'submit', value='削除')
+  p= task.description
