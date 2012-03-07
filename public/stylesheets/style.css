@@ -25,9 +25,16 @@ s.diagonally:after {
   border: 1px solid #fff;
 }
 
+s.diagonally.leftUp:before {
+  content: "完了! ";
+  color:#ff0000;
+  font-weight: bold;
+}
+
 s.diagonally.leftUp:after {
   transform:rotate(4deg);
   -o-transform:rotate(4deg);
   -webkit-transform:rotate(4deg);
   -moz-transform:rotate(4deg);
 }
+
