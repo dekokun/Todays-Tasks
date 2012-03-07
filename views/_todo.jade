@@ -1,7 +1,7 @@
 li
   - if(todo.completed)
     p
-      s= todo.title 
+      s(class="diagonally leftUp")= todo.title 
   - else
     p= todo.title 
   form(action='/todo/'+todo._id, method= 'POST')
