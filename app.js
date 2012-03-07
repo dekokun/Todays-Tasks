@@ -48,7 +48,7 @@
   Todos = new mongoose.Schema({
     title: String,
     description: String,
-    deleted: Boolean
+    completed: Boolean
   });
 
   mongoose.model('Todos', Todos);
@@ -61,7 +61,9 @@
 
   app.post("/todo", routes.add_todo(Todos));
 
-  app.del("/todo/:id", routes.del_task(Todos));
+  app.put("/todo/:id", routes.change_todo(Todos));
+
+  app.del("/todo/:id", routes.del_todo(Todos));
 
   app.get("/task", routes.tasks(Tasks));
 

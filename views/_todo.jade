@@ -1,7 +1,20 @@
 li
-  p= todo.title 
-    input(type='checkbox', name='deleted')
+  - if(todo.completed)
+    p
+      s= todo.title 
+  - else
+    p= todo.title 
   form(action='/todo/'+todo._id, method= 'POST')
     input(type='hidden', name='_method', value='delete')
     input(type= 'submit', value='削除')
+  - if(todo.completed)
+    form(action='/todo/'+todo._id, method= 'POST')
+      input(type='hidden', name='_method', value='put')
+      input(type='hidden', name='completed', value='false')
+      input(type= 'submit', value='未完了')
+  - else
+    form(action='/todo/'+todo._id, method= 'POST')
+      input(type='hidden', name='_method', value='put')
+      input(type='hidden', name='completed', value='true')
+      input(type= 'submit', value='完了')
   p= todo.description

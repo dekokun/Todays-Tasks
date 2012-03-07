@@ -25,7 +25,7 @@ mongoose.connect 'mongodb://localhost/everydaystasks'
 Tasks = new mongoose.Schema {title: String, description: String, url: String}
 mongoose.model 'Tasks', Tasks
 Tasks = mongoose.model 'Tasks'
-Todos = new mongoose.Schema {title: String, description: String, deleted: Boolean}
+Todos = new mongoose.Schema {title: String, description: String, completed: Boolean}
 mongoose.model 'Todos', Todos
 Todos = mongoose.model 'Todos'
 
@@ -33,7 +33,8 @@ Todos = mongoose.model 'Todos'
 app.get "/", routes.index(Tasks)
 app.get "/todo", routes.todo(Todos)
 app.post "/todo", routes.add_todo(Todos)
-app.del "/todo/:id", routes.del_task(Todos)
+app.put "/todo/:id", routes.change_todo(Todos)
+app.del "/todo/:id", routes.del_todo(Todos)
 
 app.get "/task", routes.tasks(Tasks)
 app.post "/task", routes.add_task(Tasks)
