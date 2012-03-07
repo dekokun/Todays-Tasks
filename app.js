@@ -71,7 +71,7 @@
 
   app.del("/task/:id", routes.del_task(Tasks));
 
-  app.listen(443);
+  app.listen(process.env.NODE_PORT || 443);
 
   console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
 
