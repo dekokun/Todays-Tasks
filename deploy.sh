@@ -2,7 +2,6 @@ case $1 in
   merge)
     git checkout master || exit 1
     git merge development || exit 1
-    node app.js
     open -a Firefox http://127.0.0.1:5001/
     ;;
   deploy)
@@ -10,7 +9,6 @@ case $1 in
     open -a Firefox http://10.128.32.112:443/
     ;;
   test)
-    node app.js
     open -a Firefox http://127.0.0.1:5001/
     ;;
   develop)
