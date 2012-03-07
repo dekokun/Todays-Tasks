@@ -1,0 +1,7 @@
+li
+  p= todo.title 
+    input(type='checkbox', name='deleted')
+  form(action='/todo/'+todo._id, method= 'POST')
+    input(type='hidden', name='_method', value='delete')
+    input(type= 'submit', value='削除')
+  p= todo.description

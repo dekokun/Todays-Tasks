@@ -45,4 +45,29 @@
     };
   };
 
+  exports.todo = function(collection) {
+    return function(req, res) {
+      return collection.find({}, function(err, todos) {
+        return res.render('todo', {
+          todos: todos,
+          title: 'TODO'
+        });
+      });
+    };
+  };
+
+  exports.add_todo = function(collection) {
+    return function(req, res) {
+      var deleted;
+      if (!(deleted = req.body.deleted)) deleted = false;
+      return new collection({
+        title: req.body.title,
+        description: req.body.description,
+        deleted: deleted
+      }).save(function(err) {
+        return res.redirect('/todo');
+      });
+    };
+  };
+
 }).call(this);

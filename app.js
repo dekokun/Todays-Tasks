@@ -1,5 +1,5 @@
 (function() {
-  var Tasks, app, express, mongoose, routes;
+  var Tasks, Todos, app, express, mongoose, routes;
 
   express = require("express");
 
@@ -45,7 +45,23 @@
 
   Tasks = mongoose.model('Tasks');
 
+  Todos = new mongoose.Schema({
+    title: String,
+    description: String,
+    deleted: Boolean
+  });
+
+  mongoose.model('Todos', Todos);
+
+  Todos = mongoose.model('Todos');
+
   app.get("/", routes.index(Tasks));
+
+  app.get("/todo", routes.todo(Todos));
+
+  app.post("/todo", routes.add_todo(Todos));
+
+  app.del("/todo/:id", routes.del_task(Todos));
 
   app.get("/task", routes.tasks(Tasks));
 
