@@ -6,15 +6,7 @@ html
   body
     section
       h1 朝の定常管理
-      nav
-        h1 Navigation
-        ul
-          li
-            a(href='/') チェックリスト
-          li
-            a(href='task') task
-          li
-            a(href='todo') todo
+      nav!= partial('nav')
       article
         header
           h1= title
