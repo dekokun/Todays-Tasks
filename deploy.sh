@@ -19,6 +19,7 @@ case $1 in
     ;;
   deploy)
     git push origin $MASTER_BRANCH || exit 1
+    cap deploy
     open -a Firefox $PRODUCT_URL
     ;;
   test)
