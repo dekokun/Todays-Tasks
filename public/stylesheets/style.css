@@ -7,6 +7,30 @@ a {
   color: #00B7FF;
 }
 
+nav {
+  float: left;
+  width: 160px;
+}
+
+article {
+  float: left;
+}
+
+footer {
+  clear: both;
+}
+
+nav ul {
+  list-style-type:none;
+  margin:0;
+  padding:0;
+}
+
+nav a {
+  display:block;
+  width:150px;
+}
+
 s.diagonally {
   position: relative;
   text-decoration: none;
