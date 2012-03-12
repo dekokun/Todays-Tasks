@@ -1,5 +1,4 @@
-section
-  h1 チェックリスト
-  form(action='/task', method= 'POST')
-    ul!= partial('check', tasks)
+h1 チェックリスト
+form(action='/task', method= 'POST')
+  ul!= partial('check', tasks)
 
