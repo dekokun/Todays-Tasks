@@ -1,3 +1,4 @@
 node_modules/*
 nohup.out
 tags
+config/deploy/*
