@@ -4,7 +4,7 @@ html
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
-    arcitcle
+    section
       h1 朝の定常管理
       nav
         h1 Navigation
@@ -15,7 +15,8 @@ html
             a(href='task') task
           li
             a(href='todo') todo
-      header
-        h1= title
-      section!= body
+      article
+        header
+          h1= title
+        section!= body
       footer!= partial('footer')
