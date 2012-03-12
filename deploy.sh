@@ -13,7 +13,8 @@ case $1 in
     read ANSWER
     if [ $ANSWER = 'y' ]; then
       git checkout $DEVELOP_BRANCH
-      echo "ブランチを $DEVELOP_BRANCH に戻しました y/n"
+      git branch
+      echo "ブランチを $DEVELOP_BRANCH に戻しました"
     fi
     ;;
   deploy)
