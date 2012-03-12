@@ -1,24 +1,21 @@
-article
-  header
-    h1= title
-  section
-    h2 Task一覧
-  ul!= partial('task', tasks)
+section
+  h1 Task一覧
+ul!= partial('task', tasks)
 
-  section
-    h2 新規Task
-    form(action='/task', method= 'POST')
-      dl
-        dt タスク名
-        dd
-          input(name='title')
-        dt 説明
-        dd
-          input(name='description')
-        dt URL
-        dd
-          input(name='url')
-      input(type='submit')
+section
+  h2 新規Task
+  form(action='/task', method= 'POST')
+    dl
+      dt タスク名
+      dd
+        input(name='title')
+      dt 説明
+      dd
+        input(name='description')
+      dt URL
+      dd
+        input(name='url')
+    input(type='submit')
 
-  footer
-    a(href='/') メインページ
+footer
+  a(href='/') メインページ

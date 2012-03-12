@@ -1,8 +1,5 @@
-article
-  header
-    h1= title
-  section
-    h2 チェックリスト
-    form(action='/task', method= 'POST')
-      ul!= partial('check', tasks)
+section
+  h1 チェックリスト
+  form(action='/task', method= 'POST')
+    ul!= partial('check', tasks)
 

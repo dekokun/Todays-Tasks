@@ -1,22 +1,19 @@
-article
-  header
-    h1= title
-  section
-    h2 TODO一覧
-  ul!= partial('todo', todos)
+section
+  h1 TODO一覧
+ul!= partial('todo', todos)
 
-  section
-    h2 新規TODO
-    form(action='/todo', method= 'POST')
-      input(type='hidden', name='deleted')
-      dl
-        dt TODO名
-        dd
-          input(name='title')
-        dt 説明
-        dd
-          input(name='description')
-      input(type='submit')
+section
+  h2 新規TODO
+  form(action='/todo', method= 'POST')
+    input(type='hidden', name='deleted')
+    dl
+      dt TODO名
+      dd
+        input(name='title')
+      dt 説明
+      dd
+        input(name='description')
+    input(type='submit')
 
-  footer
-    a(href='/') メインページ
+footer
+  a(href='/') メインページ

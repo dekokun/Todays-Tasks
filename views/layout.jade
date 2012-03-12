@@ -3,4 +3,16 @@ html
   head
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
-  body!= body
+  body
+    header
+      h1= title
+      nav
+        h1 Navigation
+        ul
+          li
+            a(href='/') チェックリスト
+          li
+            a(href='task') task
+          li
+            a(href='todo') todo
+    arcitcle!= body
