@@ -19,7 +19,7 @@ case $1 in
     ;;
   deploy)
     git push origin $MASTER_BRANCH || exit 1
-    cap product deploy
+    bundle exec cap product deploy
     open -a Firefox $PRODUCT_URL
     ;;
   test)
