@@ -1,9 +1,7 @@
 (function() {
   var Todos, mongoose;
 
-  mongoose = require('mongoose');
-
-  mongoose.connect('mongodb://localhost/everydaystasks');
+  mongoose = require('./db');
 
   Todos = new mongoose.Schema({
     title: String,

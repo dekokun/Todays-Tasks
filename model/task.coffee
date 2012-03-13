@@ -1,5 +1,4 @@
-mongoose = require 'mongoose'
-mongoose.connect 'mongodb://localhost/everydaystasks'
+mongoose = require './db'
 
 Tasks = new mongoose.Schema {title: String, description: String, url: String}
 mongoose.model 'Tasks', Tasks
