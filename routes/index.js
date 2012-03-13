@@ -48,6 +48,9 @@
   exports.todo = function(collection) {
     return function(req, res) {
       return collection.find({}, function(err, todos) {
+        todos.sort(function(a, b) {
+          return b.nice - a.nice;
+        });
         return res.render('todo', {
           todos: todos,
           title: 'TODO'
@@ -94,6 +97,20 @@
       }, {
         $set: {
           completed: completed
+        }
+      }, function(err) {
+        return res.redirect('/todo');
+      });
+    };
+  };
+
+  exports.nice = function(collection) {
+    return function(req, res) {
+      return collection.update({
+        _id: req.params.id
+      }, {
+        $inc: {
+          nice: 1
         }
       }, function(err) {
         return res.redirect('/todo');

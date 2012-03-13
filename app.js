@@ -48,7 +48,9 @@
   Todos = new mongoose.Schema({
     title: String,
     description: String,
-    completed: Boolean
+    completed: Boolean,
+    nice: Number,
+    "default": 0
   });
 
   mongoose.model('Todos', Todos);
@@ -60,6 +62,8 @@
   app.get("/todo", routes.todo(Todos));
 
   app.post("/todo", routes.add_todo(Todos));
+
+  app.put("/todo/:id/nice", routes.nice(Todos));
 
   app.put("/todo/:id", routes.change_todo(Todos));
 

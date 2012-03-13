@@ -17,4 +17,9 @@ li
       input(type='hidden', name='_method', value='put')
       input(type='hidden', name='completed', value='true')
       input(type= 'submit', value='完了')
+
+  form(action='/todo/'+todo._id+'/nice', method= 'POST')
+    input(type='hidden', name='_method', value='put')
+    input(type= 'submit', value='いいね!')
+  p.nice= todo.nice
   p= todo.description
