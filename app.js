@@ -1,5 +1,5 @@
 (function() {
-  var Tasks, Todos, app, express, index, mongoose, task, todo;
+  var Tasks, Todos, app, express, index, task, todo;
 
   express = require("express");
 
@@ -31,35 +31,13 @@
     }));
   });
 
+  Todos = require("./model/todo");
+
+  Tasks = require("./model/task");
+
   app.configure("production", function() {
     return app.use(express.errorHandler());
   });
-
-  mongoose = require('mongoose');
-
-  mongoose.connect('mongodb://localhost/everydaystasks');
-
-  Tasks = new mongoose.Schema({
-    title: String,
-    description: String,
-    url: String
-  });
-
-  mongoose.model('Tasks', Tasks);
-
-  Tasks = mongoose.model('Tasks');
-
-  Todos = new mongoose.Schema({
-    title: String,
-    description: String,
-    completed: Boolean,
-    nice: Number,
-    "default": 0
-  });
-
-  mongoose.model('Todos', Todos);
-
-  Todos = mongoose.model('Todos');
 
   app.get("/", index.index(Tasks));
 
