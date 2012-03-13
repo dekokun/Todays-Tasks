@@ -14,20 +14,20 @@ exports.todo = (collection) ->
       })
     )
 
-exports.add_todo = (collection) ->
+exports.add = (collection) ->
   (req, res) ->
     if !(completed = req.body.completed)
       completed = false
     new collection({title: req.body.title, description: req.body.description, completed: completed}).save (err) ->
       res.redirect('/todo')
 
-exports.del_todo = (collection) ->
+exports.del = (collection) ->
   (req, res) ->
     console.log req.params.id
     collection.remove {_id: req.params.id}, (err) ->
       res.redirect('/todo')
 
-exports.change_todo = (collection) ->
+exports.change = (collection) ->
   (req, res) ->
     if (req.body.completed == "false" || !req.body.completed)
       completed = false

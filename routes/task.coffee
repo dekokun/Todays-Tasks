@@ -7,12 +7,12 @@ exports.tasks = (collection) ->
       })
     )
 
-exports.add_task = (collection) ->
+exports.add = (collection) ->
   (req, res) ->
     new collection({title: req.body.title, description: req.body.description, url: req.body.url}).save (err) ->
       res.redirect('/task')
 
-exports.del_task = (collection) ->
+exports.del = (collection) ->
   (req, res) ->
     console.log req.params.id
     collection.remove {_id: req.params.id}, (err) ->

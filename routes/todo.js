@@ -20,7 +20,7 @@
     };
   };
 
-  exports.add_todo = function(collection) {
+  exports.add = function(collection) {
     return function(req, res) {
       var completed;
       if (!(completed = req.body.completed)) completed = false;
@@ -34,7 +34,7 @@
     };
   };
 
-  exports.del_todo = function(collection) {
+  exports.del = function(collection) {
     return function(req, res) {
       console.log(req.params.id);
       return collection.remove({
@@ -45,7 +45,7 @@
     };
   };
 
-  exports.change_todo = function(collection) {
+  exports.change = function(collection) {
     return function(req, res) {
       var completed;
       if (req.body.completed === "false" || !req.body.completed) {

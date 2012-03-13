@@ -11,7 +11,7 @@
     };
   };
 
-  exports.add_task = function(collection) {
+  exports.add = function(collection) {
     return function(req, res) {
       return new collection({
         title: req.body.title,
@@ -23,7 +23,7 @@
     };
   };
 
-  exports.del_task = function(collection) {
+  exports.del = function(collection) {
     return function(req, res) {
       console.log(req.params.id);
       return collection.remove({
