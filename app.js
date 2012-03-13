@@ -1,9 +1,13 @@
 (function() {
-  var Tasks, Todos, app, express, mongoose, routes;
+  var Tasks, Todos, app, express, index, mongoose, task, todo;
 
   express = require("express");
 
-  routes = require("./routes");
+  index = require("./routes/index");
+
+  todo = require("./routes/todo");
+
+  task = require("./routes/task");
 
   app = module.exports = express.createServer();
 
@@ -57,23 +61,23 @@
 
   Todos = mongoose.model('Todos');
 
-  app.get("/", routes.index(Tasks));
+  app.get("/", index.index(Tasks));
 
-  app.get("/todo", routes.todo(Todos));
+  app.get("/todo", todo.todo(Todos));
 
-  app.post("/todo", routes.add_todo(Todos));
+  app.post("/todo", todo.add_todo(Todos));
 
-  app.put("/todo/:id/nice", routes.nice(Todos));
+  app.put("/todo/:id/nice", todo.nice(Todos));
 
-  app.put("/todo/:id", routes.change_todo(Todos));
+  app.put("/todo/:id", todo.change_todo(Todos));
 
-  app.del("/todo/:id", routes.del_todo(Todos));
+  app.del("/todo/:id", todo.del_todo(Todos));
 
-  app.get("/task", routes.tasks(Tasks));
+  app.get("/task", task.tasks(Tasks));
 
-  app.post("/task", routes.add_task(Tasks));
+  app.post("/task", task.add_task(Tasks));
 
-  app.del("/task/:id", routes.del_task(Tasks));
+  app.del("/task/:id", task.del_task(Tasks));
 
   app.listen(process.env.NODE_PORT || 443);
 
