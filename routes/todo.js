@@ -4,7 +4,13 @@
     return function(req, res) {
       return collection.find({}, function(err, todos) {
         todos.sort(function(a, b) {
-          return b.nice - a.nice;
+          if (a.completed === b.completed) {
+            return b.nice - a.nice;
+          } else if (a.completed) {
+            return 1;
+          } else {
+            return -1;
+          }
         });
         return res.render('todo', {
           todos: todos,

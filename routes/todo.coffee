@@ -2,7 +2,12 @@ exports.todo = (collection) ->
   (req, res) ->
     collection.find({}, (err, todos) ->
       todos.sort (a,b) ->
-        return b.nice - a.nice
+        if a.completed == b.completed
+          return b.nice - a.nice
+        else if a.completed
+          return 1
+        else
+          return -1
       res.render('todo', {
         todos: todos,
         title: 'TODO'
