@@ -1,8 +1,8 @@
-h1 TODO一覧
+h3 TODO一覧
 ul!= partial('todo', todos)
 
 section
-  h2 新規TODO
+  h4 新規TODO
   form(action='/todo', method= 'POST')
     input(type='hidden', name='deleted')
     dl
