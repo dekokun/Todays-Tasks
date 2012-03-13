@@ -20,6 +20,6 @@ namespace :deploy do
   task :start do ; end
   task :stop do ; end
   task :restart do
-    run "cd #{File.join(current_path)} && npm install"
+    run "cd #{File.join(current_path)} && npm install && sudo forever restart #{File.join(current_path, "app.js")}"
   end
 end
