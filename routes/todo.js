@@ -8,8 +8,8 @@
           a.nice = (_ref = a.nice) != null ? _ref : 0;
           b.nice = (_ref2 = b.nice) != null ? _ref2 : 0;
           if (a.completed === b.completed) {
-            console.log(b_nice - a_nice);
-            return b_nice - a_nice;
+            console.log(b.nice - a.nice);
+            return b.nice - a.nice;
           } else if (a.completed) {
             return 1;
           } else {
