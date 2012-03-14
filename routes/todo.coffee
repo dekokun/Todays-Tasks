@@ -2,7 +2,10 @@ exports.todo = (collection) ->
   (req, res) ->
     collection.find({}, (err, todos) ->
       todos.sort (a,b) ->
+        a.nice = a.nice ? 0
+        b.nice = b.nice ? 0
         if a.completed == b.completed
+          console.log b.nice - a.nice
           return b.nice - a.nice
         else if a.completed
           return 1
