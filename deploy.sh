@@ -3,6 +3,7 @@ PRODUCT_URL=http://10.128.32.112:443/
 NOW_BRANCH=`cat .git/HEAD | cut -d'/' -f3`
 DEVELOP_BRANCH=development
 MASTER_BRANCH=master
+COV_FILE=cov.html
 
 case $1 in
   merge)
@@ -24,7 +25,12 @@ case $1 in
     open -a Firefox $PRODUCT_URL
     ;;
   test)
+    npm test
+    mocha -s 1 -R html-cov > $COV_FILE
+    open $COV_FILE
     open -a Firefox $DEVELOP_URL
+    sleep 5
+    rm cov.html
     ;;
   develop)
     git checkout $DEVELOP_BRANCH || exit 1
