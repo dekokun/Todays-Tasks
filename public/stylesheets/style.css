@@ -7,15 +7,6 @@ a {
   color: #00B7FF;
 }
 
-nav {
-  float: left;
-  width: 160px;
-}
-
-article {
-  float: left;
-}
-
 footer {
   clear: both;
 }
