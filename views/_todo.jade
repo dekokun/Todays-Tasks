@@ -20,6 +20,5 @@ li
 
   form(action='/todo/'+todo._id+'/nice', method= 'POST')
     input(type='hidden', name='_method', value='put')
-    input(type= 'submit', value='いいね!')
-  p.nice= todo.nice
+    input(type= 'submit', value=todo.nice + ' いいね!')
   p= todo.description
