@@ -5,10 +5,11 @@ html
     link(rel='stylesheet', href='/stylesheets/style.css')
     link(rel='stylesheet', href='/stylesheets/bootstrap.css')
   body
-    section
+    section.container-fluid
       h1 朝の定常管理
-      nav!= partial('nav')
-      article
-        h2= title
-        section!= body
-      footer!= partial('footer')
+      .row-fluid
+        nav.span2!= partial('nav')
+        article.span10
+          h2= title
+          section!= body
+        footer!= partial('footer')
