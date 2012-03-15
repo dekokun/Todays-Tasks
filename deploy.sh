@@ -6,6 +6,7 @@ MASTER_BRANCH=master
 
 case $1 in
   merge)
+    git push origin $DEVELOP_BRANCH || exit 1
     git checkout $MASTER_BRANCH || exit 1
     git merge $DEVELOP_BRANCH || exit 1
     open -a Firefox $DEVELOP_URL
