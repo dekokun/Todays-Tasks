@@ -1,23 +1,20 @@
 li
   - if(todo.completed)
+    submit_value = '未完了'
+    button_value = false
     p
-      s(class="diagonally leftUp")= todo.title 
+      s.diagonally.leftUp= todo.title 
   - else
+    submit_value = '完了'
+    button_value = true
     p= todo.title 
   form(action='/todo/'+todo._id, method= 'POST')
     input(type='hidden', name='_method', value='delete')
     input(type= 'submit', value='削除')
-  - if(todo.completed)
-    form(action='/todo/'+todo._id, method= 'POST')
-      input(type='hidden', name='_method', value='put')
-      input(type='hidden', name='completed', value='false')
-      input(type= 'submit', value='未完了')
-  - else
-    form(action='/todo/'+todo._id, method= 'POST')
-      input(type='hidden', name='_method', value='put')
-      input(type='hidden', name='completed', value='true')
-      input(type= 'submit', value='完了')
-
+  form(action='/todo/'+todo._id, method= 'POST')
+    input(type='hidden', name='_method', value='put')
+    input(type='hidden', name='completed', value="#{button_value}")
+    input(type= 'submit', value="#{submit_value}")
   form(action='/todo/'+todo._id+'/nice', method= 'POST')
     input(type='hidden', name='_method', value='put')
     input(type= 'submit', value=todo.nice + ' いいね!')
