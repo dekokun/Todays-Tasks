@@ -2,6 +2,7 @@ express = require("express")
 index = require("./routes/index")
 todo = require("./routes/todo")
 task = require("./routes/task")
+messages = require("express-messages")
 
 
 app = module.exports = express.createServer()
@@ -14,6 +15,7 @@ app.configure ->
   app.use express.session(secret: "your secret here")
   app.use app.router
   app.use express.static(__dirname + "/public")
+  app.dynamicHelpers({ messages: messages });
 
 app.configure "development", ->
   app.use express.errorHandler(

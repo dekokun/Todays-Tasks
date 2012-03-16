@@ -1,5 +1,5 @@
 (function() {
-  var Tasks, Todos, app, express, index, task, todo;
+  var Tasks, Todos, app, express, index, messages, task, todo;
 
   express = require("express");
 
@@ -8,6 +8,8 @@
   todo = require("./routes/todo");
 
   task = require("./routes/task");
+
+  messages = require("express-messages");
 
   app = module.exports = express.createServer();
 
@@ -21,7 +23,10 @@
       secret: "your secret here"
     }));
     app.use(app.router);
-    return app.use(express.static(__dirname + "/public"));
+    app.use(express.static(__dirname + "/public"));
+    return app.dynamicHelpers({
+      messages: messages
+    });
   });
 
   app.configure("development", function() {
