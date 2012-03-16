@@ -4,4 +4,4 @@ li
   p= task.description
   form(action='/task/'+task._id, method= 'POST')
     input(type='hidden', name='_method', value='delete')
-    input.btn-mini.btn-danger(type= 'submit', value='削除')
+    input.btn.btn-mini.btn-danger(type= 'submit', value='削除')
