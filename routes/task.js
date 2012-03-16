@@ -25,6 +25,7 @@
 
   exports.del = function(collection) {
     return function(req, res) {
+      req.flash('alert-info', '削除しました');
       console.log(req.params.id);
       return collection.remove({
         _id: req.params.id

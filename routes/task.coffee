@@ -14,6 +14,7 @@ exports.add = (collection) ->
 
 exports.del = (collection) ->
   (req, res) ->
+    req.flash('alert-info', '削除しました')
     console.log req.params.id
     collection.remove {_id: req.params.id}, (err) ->
       res.redirect('/task')
