@@ -39,7 +39,7 @@ case $1 in
     coffee -wc model/ &
     coffee -wc public/javascript/ &
     coffee -wc test/ &
-    mongod run --config /usr/local/Cellar/mongodb/2.0.3-x86_64/mongod.conf &
+    mongod run &
     node-dev app.js
     ;;
    *)
