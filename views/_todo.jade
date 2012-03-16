@@ -8,6 +8,7 @@ li
     submit_value = '完了'
     button_value = true
     p= todo.title 
+  p= todo.description
   form(action='/todo/'+todo._id, method= 'POST')
     input(type='hidden', name='_method', value='delete')
     input.btn-mini.btn-danger(type= 'submit', value='削除')
@@ -18,4 +19,3 @@ li
   form(action='/todo/'+todo._id+'/nice', method= 'POST')
     input(type='hidden', name='_method', value='put')
     input.btn-mini.btn-info(type= 'submit', value=todo.nice + ' いいね!')
-  p= todo.description
