@@ -10,12 +10,12 @@ li
     p= todo.title 
   form(action='/todo/'+todo._id, method= 'POST')
     input(type='hidden', name='_method', value='delete')
-    input(type= 'submit', value='削除')
+    input.btn-mini.btn-danger(type= 'submit', value='削除')
   form(action='/todo/'+todo._id, method= 'POST')
     input(type='hidden', name='_method', value='put')
     input(type='hidden', name='completed', value="#{button_value}")
-    input(type= 'submit', value="#{submit_value}")
+    input.btn-mini.btn-success(type= 'submit', value="#{submit_value}")
   form(action='/todo/'+todo._id+'/nice', method= 'POST')
     input(type='hidden', name='_method', value='put')
-    input(type= 'submit', value=todo.nice + ' いいね!')
+    input.btn-mini.btn-info(type= 'submit', value=todo.nice + ' いいね!')
   p= todo.description
