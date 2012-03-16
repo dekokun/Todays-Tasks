@@ -53,3 +53,18 @@ s.diagonally.leftUp:after {
   -moz-transform:rotate(4deg);
 }
 
+.form-group form {
+  position: relative;
+  float: left;
+  margin-left: 0px;
+}
+
+.form-group:before,
+.form-group:after {
+  display: table;
+  content: "";
+}
+
+.form-group:after {
+  clear: both;
+}

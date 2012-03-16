@@ -9,13 +9,14 @@ li
     button_value = true
     p= todo.title 
   p= todo.description
-  form(action='/todo/'+todo._id, method= 'POST')
-    input(type='hidden', name='_method', value='delete')
-    input.btn-mini.btn-danger(type= 'submit', value='削除')
-  form(action='/todo/'+todo._id, method= 'POST')
-    input(type='hidden', name='_method', value='put')
-    input(type='hidden', name='completed', value="#{button_value}")
-    input.btn-mini.btn-success(type= 'submit', value="#{submit_value}")
-  form(action='/todo/'+todo._id+'/nice', method= 'POST')
-    input(type='hidden', name='_method', value='put')
-    input.btn-mini.btn-info(type= 'submit', value=todo.nice + ' いいね!')
+  .form-group
+    form(action='/todo/'+todo._id, method= 'POST')
+      input(type='hidden', name='_method', value='delete')
+      input.btn.btn-mini.btn-danger(type= 'submit', value='削除')
+    form(action='/todo/'+todo._id, method= 'POST')
+      input(type='hidden', name='_method', value='put')
+      input(type='hidden', name='completed', value="#{button_value}")
+      input.btn.btn-mini.btn-success(type= 'submit', value="#{submit_value}")
+    form(action='/todo/'+todo._id+'/nice', method= 'POST')
+      input(type='hidden', name='_method', value='put')
+      input.btn.btn-mini.btn-info(type= 'submit', value=todo.nice + ' いいね!')
