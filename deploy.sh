@@ -26,7 +26,7 @@ case $1 in
     ;;
   test)
     npm test
-    mocha -s 1 -R html-cov > $COV_FILE
+    mocha -R html-cov > $COV_FILE
     open $COV_FILE
     open -a Firefox $DEVELOP_URL
     sleep 5

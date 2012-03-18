@@ -1,0 +1,7 @@
+--require should
+--reporter spec
+--ui bdd
+--growl
+--colors
+--slow 50
+--timeout 500
