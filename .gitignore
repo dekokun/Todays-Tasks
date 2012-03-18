@@ -3,3 +3,4 @@ nohup.out
 tags
 config/deploy/*
 Gemfile.lock
+npm-debug.log
