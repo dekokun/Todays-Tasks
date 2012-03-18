@@ -23,13 +23,10 @@ app.configure "development", ->
     showStack: true
   )
 
-# model
-Tasks = require("./model/task")
-
 app.configure "production", ->
   app.use express.errorHandler()
 
-app.get "/", index.index(Tasks)
+app.get "/", index.index
 
 app.get "/todo", todo.todo
 app.post "/todo", todo.add

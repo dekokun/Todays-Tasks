@@ -1,5 +1,5 @@
 (function() {
-  var Tasks, app, express, index, messages, task, todo;
+  var app, express, index, messages, task, todo;
 
   express = require("express");
 
@@ -36,13 +36,11 @@
     }));
   });
 
-  Tasks = require("./model/task");
-
   app.configure("production", function() {
     return app.use(express.errorHandler());
   });
 
-  app.get("/", index.index(Tasks));
+  app.get("/", index.index);
 
   app.get("/todo", todo.todo);
 
