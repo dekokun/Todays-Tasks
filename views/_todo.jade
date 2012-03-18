@@ -1,4 +1,8 @@
 li
+  - if(todo.nice == undefined)
+    nice = 0
+  - else
+    nice = todo.nice
   - if(todo.completed)
     submit_value = '未完了'
     button_value = false
@@ -19,4 +23,4 @@ li
       input.btn.btn-mini.btn-success(type= 'submit', value="#{submit_value}")
     form(action='/todo/'+todo._id+'/nice', method= 'POST')
       input(type='hidden', name='_method', value='put')
-      input.btn.btn-mini.btn-info(type= 'submit', value=todo.nice + ' いいね!')
+      input.btn.btn-mini.btn-info(type= 'submit', value="#{nice} いいね!")
