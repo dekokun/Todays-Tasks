@@ -1,5 +1,6 @@
 DEVELOP_URL=http://127.0.0.1:5001/
 PRODUCT_URL=http://10.128.32.112:443/
+TRAVIS_URL=http://travis-ci.org/#!/dekokun/Todays-Tasks/builds
 NOW_BRANCH=`cat .git/HEAD | cut -d'/' -f3`
 DEVELOP_BRANCH=development
 MASTER_BRANCH=master
@@ -8,6 +9,7 @@ COV_FILE=cov.html
 case $1 in
   merge)
     git push origin $DEVELOP_BRANCH || exit 1
+    open $TRAVIS_URL || exit
     git checkout $MASTER_BRANCH || exit 1
     git merge $DEVELOP_BRANCH || exit 1
     open -a Firefox $DEVELOP_URL
@@ -21,6 +23,7 @@ case $1 in
     ;;
   deploy)
     git push origin $MASTER_BRANCH || exit 1
+    open $TRAVIS_URL || exit
     bundle exec cap product deploy
     open -a Firefox $PRODUCT_URL
     ;;
