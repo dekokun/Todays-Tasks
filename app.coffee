@@ -37,9 +37,9 @@ app.put "/todo/:id/nice", todo.nice
 app.put "/todo/:id", todo.change
 app.del "/todo/:id", todo.del
 
-app.get "/task", task.tasks(Tasks)
-app.post "/task", task.add(Tasks)
-app.del "/task/:id", task.del(Tasks)
+app.get "/task", task.tasks
+app.post "/task", task.add
+app.del "/task/:id", task.del
 
 app.listen process.env.NODE_PORT || 443
 console.log "Express server listening on port %d in %s mode", app.address().port, app.settings.env

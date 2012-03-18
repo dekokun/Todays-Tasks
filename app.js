@@ -54,11 +54,11 @@
 
   app.del("/todo/:id", todo.del);
 
-  app.get("/task", task.tasks(Tasks));
+  app.get("/task", task.tasks);
 
-  app.post("/task", task.add(Tasks));
+  app.post("/task", task.add);
 
-  app.del("/task/:id", task.del(Tasks));
+  app.del("/task/:id", task.del);
 
   app.listen(process.env.NODE_PORT || 443);
 
