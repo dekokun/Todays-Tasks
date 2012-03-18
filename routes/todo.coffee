@@ -5,7 +5,6 @@ exports.todo = (collection) ->
         a.nice = a.nice ? 0
         b.nice = b.nice ? 0
         if a.completed == b.completed
-          console.log b.nice - a.nice
           return b.nice - a.nice
         else if a.completed
           return 1
@@ -26,7 +25,6 @@ exports.add = (collection) ->
 
 exports.del = (collection) ->
   (req, res) ->
-    console.log req.params.id
     req.flash('alert-info', '削除しました')
     collection.remove {_id: req.params.id}, (err) ->
       res.redirect('/todo')

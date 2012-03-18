@@ -8,7 +8,6 @@
           a.nice = (_ref = a.nice) != null ? _ref : 0;
           b.nice = (_ref2 = b.nice) != null ? _ref2 : 0;
           if (a.completed === b.completed) {
-            console.log(b.nice - a.nice);
             return b.nice - a.nice;
           } else if (a.completed) {
             return 1;
@@ -40,7 +39,6 @@
 
   exports.del = function(collection) {
     return function(req, res) {
-      console.log(req.params.id);
       req.flash('alert-info', '削除しました');
       return collection.remove({
         _id: req.params.id
