@@ -24,7 +24,6 @@ app.configure "development", ->
   )
 
 # model
-Todos = require("./model/todo")
 Tasks = require("./model/task")
 
 app.configure "production", ->
@@ -32,11 +31,11 @@ app.configure "production", ->
 
 app.get "/", index.index(Tasks)
 
-app.get "/todo", todo.todo(Todos)
-app.post "/todo", todo.add(Todos)
-app.put "/todo/:id/nice", todo.nice(Todos)
-app.put "/todo/:id", todo.change(Todos)
-app.del "/todo/:id", todo.del(Todos)
+app.get "/todo", todo.todo
+app.post "/todo", todo.add
+app.put "/todo/:id/nice", todo.nice
+app.put "/todo/:id", todo.change
+app.del "/todo/:id", todo.del
 
 app.get "/task", task.tasks(Tasks)
 app.post "/task", task.add(Tasks)

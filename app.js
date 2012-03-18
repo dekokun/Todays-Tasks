@@ -1,5 +1,5 @@
 (function() {
-  var Tasks, Todos, app, express, index, messages, task, todo;
+  var Tasks, app, express, index, messages, task, todo;
 
   express = require("express");
 
@@ -36,8 +36,6 @@
     }));
   });
 
-  Todos = require("./model/todo");
-
   Tasks = require("./model/task");
 
   app.configure("production", function() {
@@ -46,15 +44,15 @@
 
   app.get("/", index.index(Tasks));
 
-  app.get("/todo", todo.todo(Todos));
+  app.get("/todo", todo.todo);
 
-  app.post("/todo", todo.add(Todos));
+  app.post("/todo", todo.add);
 
-  app.put("/todo/:id/nice", todo.nice(Todos));
+  app.put("/todo/:id/nice", todo.nice);
 
-  app.put("/todo/:id", todo.change(Todos));
+  app.put("/todo/:id", todo.change);
 
-  app.del("/todo/:id", todo.del(Todos));
+  app.del("/todo/:id", todo.del);
 
   app.get("/task", task.tasks(Tasks));
 
