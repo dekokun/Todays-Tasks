@@ -15,7 +15,7 @@
     , "should": ">= 0.6.0"
   }
   , "scripts": {
-      "test": "mocha -s 1 -R spec"
+      "test": "mocha -s 10 -R spec"
     , "start": "sudo node app.js"
   }
 }
