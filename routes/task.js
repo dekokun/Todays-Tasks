@@ -20,7 +20,6 @@
 
   exports.del = function(req, res) {
     req.flash('alert-info', '削除しました');
-    console.log(req.params.id);
     return Tasks.del_task(req, res, function(err) {
       return res.redirect('/task');
     });

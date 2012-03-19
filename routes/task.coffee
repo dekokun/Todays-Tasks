@@ -14,7 +14,6 @@ exports.add = (req, res) ->
 
 exports.del = (req, res) ->
   req.flash('alert-info', '削除しました')
-  console.log req.params.id
   Tasks.del_task req, res, (err) ->
     res.redirect('/task')
 
