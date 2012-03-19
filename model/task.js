@@ -31,6 +31,12 @@
     });
   };
 
+  Tasks.all_task = function(req, res, callback) {
+    return Tasks.find({}, function(err, tasks) {
+      return callback(err, tasks);
+    });
+  };
+
   module.exports = Tasks;
 
 }).call(this);

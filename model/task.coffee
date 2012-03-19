@@ -12,4 +12,8 @@ Tasks.del_task = (req, res, callback) ->
   Tasks.remove {_id: req.params.id}, (err) ->
     callback err
 
+Tasks.all_task = (req, res, callback) ->
+  Tasks.find {}, (err, tasks) ->
+    callback err, tasks
+
 module.exports = Tasks
