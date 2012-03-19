@@ -9,13 +9,13 @@ exports.tasks = (req, res) ->
   )
 
 exports.add = (req, res) ->
-  new Tasks({title: req.body.title, description: req.body.description, url: req.body.url}).save (err) ->
+  Tasks.add_task req, res, (err) ->
     res.redirect('/task')
 
 exports.del = (req, res) ->
   req.flash('alert-info', '削除しました')
   console.log req.params.id
-  Tasks.remove {_id: req.params.id}, (err) ->
+  Tasks.del_task req, res, (err) ->
     res.redirect('/task')
 
 

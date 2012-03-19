@@ -13,6 +13,24 @@
 
   Tasks = mongoose.model('Tasks');
 
+  Tasks.add_task = function(req, res, callback) {
+    return new Tasks({
+      title: req.body.title,
+      description: req.body.description,
+      url: req.body.url
+    }).save(function(err) {
+      return callback(err);
+    });
+  };
+
+  Tasks.del_task = function(req, res, callback) {
+    return Tasks.remove({
+      _id: req.params.id
+    }, function(err) {
+      return callback(err);
+    });
+  };
+
   module.exports = Tasks;
 
 }).call(this);
