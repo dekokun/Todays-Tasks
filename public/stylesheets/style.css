@@ -41,9 +41,7 @@ del.diagonally:after {
 }
 
 del.diagonally.leftUp:before {
-  content: "完了! ";
-  color:#ff0000;
-  font-weight: bold;
+  content: "";
 }
 
 del.diagonally.leftUp:after {
@@ -51,6 +49,11 @@ del.diagonally.leftUp:after {
   -o-transform:rotate(4deg);
   -webkit-transform:rotate(4deg);
   -moz-transform:rotate(4deg);
+}
+
+p.completed {
+  color:#ff0000;
+  font-weight: bold;
 }
 
 .form-group form {
