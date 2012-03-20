@@ -13,21 +13,14 @@
   };
 
   exports.add = function(req, res) {
-    return new Tasks({
-      title: req.body.title,
-      description: req.body.description,
-      url: req.body.url
-    }).save(function(err) {
+    return Tasks.add_task(req, res, function(err) {
       return res.redirect('/task');
     });
   };
 
   exports.del = function(req, res) {
     req.flash('alert-info', '削除しました');
-    console.log(req.params.id);
-    return Tasks.remove({
-      _id: req.params.id
-    }, function(err) {
+    return Tasks.del_task(req, res, function(err) {
       return res.redirect('/task');
     });
   };
