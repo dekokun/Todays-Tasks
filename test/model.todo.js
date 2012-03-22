@@ -6,6 +6,11 @@
   should = require("should");
 
   describe("Todos", function() {
+    afterEach(function(done) {
+      return Todos.remove({}, function(err) {
+        return done(err);
+      });
+    });
     describe("todo", function() {
       beforeEach(function(done) {
         return Todos.remove({}, function() {
@@ -16,13 +21,6 @@
           }).save(function(err) {
             return done(err);
           });
-        });
-      });
-      afterEach(function(done) {
-        return Todos.remove({
-          title: 'hogehogetitle'
-        }, function(err) {
-          return done(err);
         });
       });
       it("todosが配列であること", function(done) {

@@ -2,6 +2,10 @@ Todos = require "../model/todo"
 should = require "should"
 
 describe "Todos", ->
+  afterEach (done) ->
+    Todos.remove {}, (err) ->
+      done(err)
+
   describe "todo", ->
 
     beforeEach (done) ->
@@ -9,9 +13,6 @@ describe "Todos", ->
         new Todos({title: 'hogehogetitle', description: 'fugafuga', completed: true}).save (err) ->
           done(err)
 
-    afterEach (done) ->
-      Todos.remove {title: 'hogehogetitle'}, (err) ->
-        done(err)
 
     it "todosが配列であること", (done) ->
       callback = (err, todos) ->
