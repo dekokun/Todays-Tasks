@@ -4,4 +4,18 @@ Todos = new mongoose.Schema {title: String, description: String, completed: Bool
 mongoose.model 'Todos', Todos
 Todos = mongoose.model 'Todos'
 
+Todos.list = (callback) ->
+  this.find({}, (err, todos) ->
+    todos.sort (a,b) ->
+      a.nice = a.nice ? 0
+      b.nice = b.nice ? 0
+      if a.completed == b.completed
+        return b.nice - a.nice
+      else if a.completed
+        return 1
+      else
+        return -1
+    callback(err, todos)
+  )
+
 module.exports = Todos

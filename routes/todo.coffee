@@ -1,21 +1,11 @@
 Todos = require("../model/todo")
 
 exports.todo = (req, res) ->
-  Todos.find({}, (err, todos) ->
-    todos.sort (a,b) ->
-      a.nice = a.nice ? 0
-      b.nice = b.nice ? 0
-      if a.completed == b.completed
-        return b.nice - a.nice
-      else if a.completed
-        return 1
-      else
-        return -1
+  Todos.list (err, todos) ->
     res.render('todo', {
       todos: todos,
       title: 'TODO'
     })
-  )
 
 exports.add = (req, res) ->
   if !(completed = req.body.completed)
