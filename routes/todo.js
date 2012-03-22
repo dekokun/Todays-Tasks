@@ -13,13 +13,7 @@
   };
 
   exports.add = function(req, res) {
-    var completed;
-    if (!(completed = req.body.completed)) completed = false;
-    return new Todos({
-      title: req.body.title,
-      description: req.body.description,
-      completed: completed
-    }).save(function(err) {
+    return Todos.add_todo(req.body.title, req.body.description, req.body.completed, function(err) {
       return res.redirect('/todo');
     });
   };

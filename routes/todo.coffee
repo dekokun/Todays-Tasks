@@ -8,9 +8,7 @@ exports.todo = (req, res) ->
     })
 
 exports.add = (req, res) ->
-  if !(completed = req.body.completed)
-    completed = false
-  new Todos({title: req.body.title, description: req.body.description, completed: completed}).save (err) ->
+  Todos.add_todo req.body.title, req.body.description, req.body.completed, (err) ->
     res.redirect('/todo')
 
 exports.del = (req, res) ->

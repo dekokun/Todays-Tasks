@@ -24,3 +24,11 @@ describe "Todos", ->
         todos.should.have.length 1
         done()
       Todos.list callback
+
+  describe "add_todo", ->
+    it "completedがfalseになっていること", (done) ->
+      callback = (err) ->
+        Todos.findOne {title: 'hoge'}, (err, todo) ->
+          todo.completed.should.be.false
+          done err
+      Todos.add_todo 'hoge', 'fuga', undefined, callback

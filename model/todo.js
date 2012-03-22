@@ -33,6 +33,17 @@
     });
   };
 
+  Todos.add_todo = function(title, description, completed, callback) {
+    if (!completed) completed = false;
+    return new Todos({
+      title: title,
+      description: description,
+      completed: completed
+    }).save(function(err) {
+      return callback(err);
+    });
+  };
+
   module.exports = Todos;
 
 }).call(this);
