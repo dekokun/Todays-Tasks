@@ -38,7 +38,8 @@
     return new Todos({
       title: title,
       description: description,
-      completed: completed
+      completed: completed,
+      nice: 0
     }).save(function(err) {
       return callback(err);
     });

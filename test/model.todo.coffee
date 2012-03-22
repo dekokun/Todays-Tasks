@@ -33,3 +33,18 @@ describe "Todos", ->
           todo.completed.should.be.false
           done err
       Todos.add_todo 'hoge', 'fuga', undefined, callback
+
+    # nice.todoがnew Number(0)と比較しても0と比較しても異なるため
+    # 苦肉の策で存在確認とtodo.nice-0が０であることを以てテスト完了とする
+    it "niceが存在すること", (done) ->
+      callback = (err) ->
+        Todos.findOne {title: 'hoge'}, (err, todo) ->
+          todo.nice.should.be.exist
+          done err
+      Todos.add_todo 'hoge', 'fuga', undefined, callback
+    it "niceの値が0であること", (done) ->
+      callback = (err) ->
+        Todos.findOne {title: 'hoge'}, (err, todo) ->
+          (todo.nice - 0).should.be.equal 0
+          done err
+      Todos.add_todo 'hoge', 'fuga', undefined, callback

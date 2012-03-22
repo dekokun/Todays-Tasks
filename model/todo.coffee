@@ -21,7 +21,7 @@ Todos.list = (callback) ->
 Todos.add_todo = (title, description, completed, callback) ->
   if !completed
     completed = false
-  new Todos({title: title, description: description, completed: completed}).save (err) ->
+  new Todos({title: title, description: description, completed: completed, nice:0}).save (err) ->
     callback err
 
 module.exports = Todos

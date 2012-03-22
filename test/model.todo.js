@@ -41,13 +41,37 @@
       });
     });
     return describe("add_todo", function() {
-      return it("completedがfalseになっていること", function(done) {
+      it("completedがfalseになっていること", function(done) {
         var callback;
         callback = function(err) {
           return Todos.findOne({
             title: 'hoge'
           }, function(err, todo) {
             todo.completed.should.be["false"];
+            return done(err);
+          });
+        };
+        return Todos.add_todo('hoge', 'fuga', void 0, callback);
+      });
+      it("niceが存在すること", function(done) {
+        var callback;
+        callback = function(err) {
+          return Todos.findOne({
+            title: 'hoge'
+          }, function(err, todo) {
+            todo.nice.should.be.exist;
+            return done(err);
+          });
+        };
+        return Todos.add_todo('hoge', 'fuga', void 0, callback);
+      });
+      return it("niceの値が0であること", function(done) {
+        var callback;
+        callback = function(err) {
+          return Todos.findOne({
+            title: 'hoge'
+          }, function(err, todo) {
+            (todo.nice - 0).should.be.equal(0);
             return done(err);
           });
         };
