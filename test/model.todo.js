@@ -1,11 +1,9 @@
 (function() {
-  var Todos, should, util;
+  var Todos, should;
 
   Todos = require("../model/todo");
 
   should = require("should");
-
-  util = require("util");
 
   describe("Todos", function() {
     afterEach(function(done) {
@@ -61,9 +59,6 @@
           return Todos.findOne({
             title: 'hoge'
           }, function(err, todo) {
-            console.log(util.inspect(todo.nice.constructor, true, null));
-            console.log(todo.nice);
-            console.log(typeof todo.nice);
             todo.nice.should.be.exist;
             return done(err);
           });
