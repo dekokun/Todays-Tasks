@@ -1,5 +1,6 @@
 Todos = require "../model/todo"
 should = require "should"
+util = require "util"
 
 describe "Todos", ->
   afterEach (done) ->
@@ -34,11 +35,15 @@ describe "Todos", ->
           done err
       Todos.add_todo 'hoge', 'fuga', undefined, callback
 
-    # nice.todoがnew Number(0)と比較しても0と比較しても異なるため
-    # 苦肉の策で存在確認とtodo.nice-0が０であることを以てテスト完了とする
+    # nice.todoがNumberをコンストラクタとするオブジェクトのため、
+    # 比較ができない
+    # 苦肉の策で存在確認(null, undifined, falseではないこと)とtodo.nice-0が0であることを以てテスト完了とする
     it "niceが存在すること", (done) ->
       callback = (err) ->
         Todos.findOne {title: 'hoge'}, (err, todo) ->
+          console.log(util.inspect(todo.nice.constructor, true, null))
+          console.log(todo.nice)
+          console.log(typeof todo.nice)
           todo.nice.should.be.exist
           done err
       Todos.add_todo 'hoge', 'fuga', undefined, callback
