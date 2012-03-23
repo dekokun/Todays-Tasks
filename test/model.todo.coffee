@@ -1,6 +1,5 @@
 Todos = require "../model/todo"
 should = require "should"
-util = require "util"
 
 describe "Todos", ->
   afterEach (done) ->
@@ -41,9 +40,6 @@ describe "Todos", ->
     it "niceが存在すること", (done) ->
       callback = (err) ->
         Todos.findOne {title: 'hoge'}, (err, todo) ->
-          console.log(util.inspect(todo.nice.constructor, true, null))
-          console.log(todo.nice)
-          console.log(typeof todo.nice)
           todo.nice.should.be.exist
           done err
       Todos.add_todo 'hoge', 'fuga', undefined, callback
