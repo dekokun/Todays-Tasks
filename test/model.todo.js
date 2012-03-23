@@ -1,7 +1,7 @@
 (function() {
   var Todos, should;
 
-  Todos = require("../model/todo");
+  Todos = process.env.TEST_COV ? require("../model-cov/todo") : require("../model/todo");
 
   should = require("should");
 

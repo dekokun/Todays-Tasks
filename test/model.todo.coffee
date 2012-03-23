@@ -1,4 +1,5 @@
-Todos = require "../model/todo"
+Todos = if process.env.TEST_COV then require "../model-cov/todo" else require "../model/todo"
+
 should = require "should"
 
 describe "Todos", ->
