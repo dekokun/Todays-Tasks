@@ -35,7 +35,7 @@ case $1 in
     ;;
   test)
     npm test
-    jscoverage --no-highlight model model-cov
+    jscoverage model model-cov
     TEST_COV=1 mocha -R html-cov > coverage.html && open coverage.html
     rm -rf model-cov
     ;;
