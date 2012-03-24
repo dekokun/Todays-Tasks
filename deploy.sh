@@ -11,6 +11,12 @@ fi
 if ! type -P mocha >/dev/null
 then npm install -g mocha
 fi
+if ! type -P coffee >/dev/null
+then npm install -g coffee-script
+fi
+if ! type -P node-dev >/dev/null
+then npm install -g node-dev
+fi
 
 case $1 in
   merge)
