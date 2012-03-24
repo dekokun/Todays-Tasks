@@ -5,6 +5,12 @@ NOW_BRANCH=`cat .git/HEAD | cut -d'/' -f3`
 DEVELOP_BRANCH=development
 MASTER_BRANCH=master
 COV_FILE=cov.html
+if ! type -P jscoverage >/dev/null
+then npm install -g jscoverage
+fi
+if ! type -P mocha >/dev/null
+then npm install -g mocha
+fi
 
 case $1 in
   merge)
