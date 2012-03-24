@@ -52,7 +52,10 @@ case $1 in
     coffee -wc model/ &
     coffee -wc public/javascript/ &
     coffee -wc test/ &
-    mongod run &
+    mongo_run=`ps aux | grep '[m]ongo'`
+    if [ -z $mongo_run ]; then
+      mongod run &
+    fi
     node-dev app.js
     ;;
    *)
