@@ -5,6 +5,18 @@ NOW_BRANCH=`cat .git/HEAD | cut -d'/' -f3`
 DEVELOP_BRANCH=development
 MASTER_BRANCH=master
 COV_FILE=cov.html
+if ! type -P jscoverage >/dev/null
+then npm install -g jscoverage
+fi
+if ! type -P mocha >/dev/null
+then npm install -g mocha
+fi
+if ! type -P coffee >/dev/null
+then npm install -g coffee-script
+fi
+if ! type -P node-dev >/dev/null
+then npm install -g node-dev
+fi
 
 case $1 in
   merge)
@@ -29,8 +41,8 @@ case $1 in
     ;;
   test)
     npm test
-    jscoverage --no-highlight model model-cov
-    TEST_COV=1 mocha -R html-cov test/*.js > coverage.html && open coverage.html
+    jscoverage model model-cov
+    TEST_COV=1 mocha -R html-cov > coverage.html && open coverage.html
     rm -rf model-cov
     ;;
   develop)
@@ -40,7 +52,10 @@ case $1 in
     coffee -wc model/ &
     coffee -wc public/javascript/ &
     coffee -wc test/ &
-    mongod run &
+    mongo_run=`ps aux | grep '[m]ongo'`
+    if [ -z $mongo_run ]; then
+      mongod run &
+    fi
     node-dev app.js
     ;;
    *)
