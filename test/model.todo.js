@@ -46,27 +46,51 @@
           return Todos.list(callback);
         });
       });
-      return describe("todoが2つ", function() {
+      return describe("todoが3つ", function() {
         beforeEach(function(done) {
           return Todos.remove({}, function() {
-            new Todos({
-              title: 'hogehogetitle',
-              description: 'fugafuga',
-              completed: true
-            }).save(function(err) {});
             return new Todos({
-              title: 'hogehogetitle',
+              title: 'false',
               description: 'fugafuga',
-              completed: true
+              completed: false
             }).save(function(err) {
-              return done(err);
+              return new Todos({
+                title: 'hogehogetitle',
+                description: 'fugafuga',
+                completed: true
+              }).save(function(err) {
+                return new Todos({
+                  title: 'nice',
+                  description: 'fugafuga',
+                  completed: false,
+                  nice: 2
+                }).save(function(err) {
+                  return done(err);
+                });
+              });
             });
           });
         });
-        return it("todosに2個要素があること", function(done) {
+        it("todosに3個要素があること", function(done) {
           var callback;
           callback = function(err, todos) {
-            todos.should.have.length(2);
+            todos.should.have.length(3);
+            return done();
+          };
+          return Todos.list(callback);
+        });
+        it("niceが高いものが1番にくること", function(done) {
+          var callback;
+          callback = function(err, todos) {
+            todos[0].title.should.be.equal('nice');
+            return done();
+          };
+          return Todos.list(callback);
+        });
+        return it("完了していないものが2番にくること", function(done) {
+          var callback;
+          callback = function(err, todos) {
+            todos[1].title.should.be.equal('false');
             return done();
           };
           return Todos.list(callback);

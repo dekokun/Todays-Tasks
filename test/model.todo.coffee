@@ -30,16 +30,29 @@ describe "Todos", ->
           done()
         Todos.list callback
 
-    describe "todoが2つ", ->
+    describe "todoが3つ", ->
       beforeEach (done) ->
         Todos.remove {}, ()->
-          new Todos({title: 'hogehogetitle', description: 'fugafuga', completed: true}).save (err) ->
-          new Todos({title: 'hogehogetitle', description: 'fugafuga', completed: true}).save (err) ->
-            done(err)
+          new Todos({title: 'false', description: 'fugafuga', completed: false}).save (err) ->
+            new Todos({title: 'hogehogetitle', description: 'fugafuga', completed: true}).save (err) ->
+              new Todos({title: 'nice', description: 'fugafuga', completed: false, nice:2}).save (err) ->
+                done(err)
 
-      it "todosに2個要素があること", (done) ->
+      it "todosに3個要素があること", (done) ->
         callback = (err, todos) ->
-          todos.should.have.length 2
+          todos.should.have.length 3
+          done()
+        Todos.list callback
+
+      it "niceが高いものが1番にくること", (done) ->
+        callback = (err, todos) ->
+          todos[0].title.should.be.equal 'nice'
+          done()
+        Todos.list callback
+
+      it "完了していないものが2番にくること", (done) ->
+        callback = (err, todos) ->
+          todos[1].title.should.be.equal 'false'
           done()
         Todos.list callback
 
