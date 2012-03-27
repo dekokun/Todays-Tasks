@@ -6,26 +6,42 @@ describe "Todos", ->
   afterEach (done) ->
     Todos.remove {}, (err) ->
       done(err)
-
-  describe "todo", ->
-
     beforeEach (done) ->
-      Todos.remove {}, ()->
-        new Todos({title: 'hogehogetitle', description: 'fugafuga', completed: true}).save (err) ->
-          done(err)
+      Todos.remove {}, (err)->
+        done(err)
 
+  describe "todo_list", ->
 
-    it "todosが配列であること", (done) ->
-      callback = (err, todos) ->
-        todos.should.be.an.instanceof Array
-        done()
-      Todos.list callback
+    describe "todoがひとつだけ", ->
+      beforeEach (done) ->
+        Todos.remove {}, ()->
+          new Todos({title: 'hogehogetitle', description: 'fugafuga', completed: true}).save (err) ->
+            done(err)
 
-    it "todosに1個だけ要素があること", (done) ->
-      callback = (err, todos) ->
-        todos.should.have.length 1
-        done()
-      Todos.list callback
+      it "todosが配列であること", (done) ->
+        callback = (err, todos) ->
+          todos.should.be.an.instanceof Array
+          done()
+        Todos.list callback
+
+      it "todosに1個だけ要素があること", (done) ->
+        callback = (err, todos) ->
+          todos.should.have.length 1
+          done()
+        Todos.list callback
+
+    describe "todoが2つ", ->
+      beforeEach (done) ->
+        Todos.remove {}, ()->
+          new Todos({title: 'hogehogetitle', description: 'fugafuga', completed: true}).save (err) ->
+          new Todos({title: 'hogehogetitle', description: 'fugafuga', completed: true}).save (err) ->
+            done(err)
+
+      it "todosに2個要素があること", (done) ->
+        callback = (err, todos) ->
+          todos.should.have.length 2
+          done()
+        Todos.list callback
 
   describe "add_todo", ->
     it "completedがfalseになっていること", (done) ->
