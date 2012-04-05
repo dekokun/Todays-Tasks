@@ -41,6 +41,7 @@ case $1 in
     ;;
   test)
     npm test
+    open -a Firefox $DEVELOP_URL
     jscoverage model model-cov
     TEST_COV=1 mocha -R html-cov test/*.js > coverage.html && open coverage.html
     rm -rf model-cov
