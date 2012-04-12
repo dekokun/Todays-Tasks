@@ -17,11 +17,14 @@ li
   .form-group
     form(action='/todo/'+todo._id, method= 'POST')
       input(type='hidden', name='_method', value='delete')
+      i.icon-trash
       input.btn.btn-mini.btn-danger(type= 'submit', value='削除')
     form(action='/todo/'+todo._id, method= 'POST')
       input(type='hidden', name='_method', value='put')
       input(type='hidden', name='completed', value="#{button_value}")
+      i.icon-ok
       input.btn.btn-mini.btn-success(type= 'submit', value="#{submit_value}")
     form(action='/todo/'+todo._id+'/nice', method= 'POST')
       input(type='hidden', name='_method', value='put')
+      i.icon-star
       input.btn.btn-mini.btn-info(type= 'submit', value="#{nice} いいね!")
