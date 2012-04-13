@@ -1,42 +1,51 @@
 (function() {
   var Tasks, mongoose;
 
-  mongoose = require('./db');
+  mongoose = require('mongoose');
 
-  Tasks = new mongoose.Schema({
-    title: String,
-    description: String,
-    url: String
-  });
+  Tasks = (function() {
 
-  mongoose.model('Tasks', Tasks);
+    function Tasks(db) {
+      mongoose.connect(db);
+      this.db = new mongoose.Schema({
+        title: String,
+        description: String,
+        url: String
+      });
+      mongoose.model('Tasks', this.db);
+      this.db = mongoose.model('Tasks');
+    }
 
-  Tasks = mongoose.model('Tasks');
+    Tasks.prototype.add_task = function(req, res, callback) {
+      return new this.db({
+        title: req.body.title,
+        description: req.body.description,
+        url: req.body.url
+      }).save(function(err) {
+        return callback(err);
+      });
+    };
 
-  Tasks.add_task = function(req, res, callback) {
-    return new Tasks({
-      title: req.body.title,
-      description: req.body.description,
-      url: req.body.url
-    }).save(function(err) {
-      return callback(err);
-    });
+    Tasks.prototype.del_task = function(req, res, callback) {
+      return this.db.remove({
+        _id: req.params.id
+      }, function(err) {
+        return callback(err);
+      });
+    };
+
+    Tasks.prototype.all_task = function(req, res, callback) {
+      return this.db.find({}, function(err, tasks) {
+        return callback(err, tasks);
+      });
+    };
+
+    return Tasks;
+
+  })();
+
+  module.exports.connect = function(db) {
+    return new Tasks(db);
   };
-
-  Tasks.del_task = function(req, res, callback) {
-    return Tasks.remove({
-      _id: req.params.id
-    }, function(err) {
-      return callback(err);
-    });
-  };
-
-  Tasks.all_task = function(req, res, callback) {
-    return Tasks.find({}, function(err, tasks) {
-      return callback(err, tasks);
-    });
-  };
-
-  module.exports = Tasks;
 
 }).call(this);

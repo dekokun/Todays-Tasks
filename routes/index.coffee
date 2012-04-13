@@ -1,4 +1,4 @@
-Tasks = require("../model/task")
+Tasks = require("../model/task").connect 'hoge'
 
 exports.index = (req, res) ->
   Tasks.all_task req, res, (err, tasks)->

@@ -1,10 +1,10 @@
 (function() {
   var Tasks;
 
-  Tasks = require("../model/task");
+  Tasks = require("../model/task").connect('mongodb://localhost/everydaystasks');
 
   exports.tasks = function(req, res) {
-    return Tasks.find({}, function(err, tasks) {
+    return Tasks.all_task(req, res, function(err, tasks) {
       return res.render('task', {
         tasks: tasks,
         title: 'Tasks'

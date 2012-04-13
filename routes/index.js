@@ -1,7 +1,7 @@
 (function() {
   var Tasks;
 
-  Tasks = require("../model/task");
+  Tasks = require("../model/task").connect('hoge');
 
   exports.index = function(req, res) {
     return Tasks.all_task(req, res, function(err, tasks) {

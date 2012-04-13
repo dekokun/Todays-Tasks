@@ -1,12 +1,11 @@
-Tasks = require("../model/task")
+Tasks = require("../model/task").connect 'mongodb://localhost/everydaystasks'
 
 exports.tasks = (req, res) ->
-  Tasks.find({}, (err, tasks) ->
+  Tasks.all_task req, res, (err, tasks)->
     res.render('task', {
       tasks: tasks,
       title: 'Tasks'
     })
-  )
 
 exports.add = (req, res) ->
   Tasks.add_task req, res, (err) ->

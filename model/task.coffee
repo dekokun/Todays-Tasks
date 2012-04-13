@@ -1,24 +1,30 @@
-mongoose = require './db'
+mongoose = require 'mongoose'
 
-Tasks = new mongoose.Schema {
-    title: String
-  , description: String
-  , url: String
-}
+class Tasks
+  constructor: (db) ->
+    mongoose.connect db
 
-mongoose.model 'Tasks', Tasks
-Tasks = mongoose.model 'Tasks'
 
-Tasks.add_task = (req, res, callback) ->
-  new Tasks({title: req.body.title, description: req.body.description, url: req.body.url}).save (err) ->
-    callback err
+    @db = new mongoose.Schema {
+        title: String
+      , description: String
+      , url: String
+    }
 
-Tasks.del_task = (req, res, callback) ->
-  Tasks.remove {_id: req.params.id}, (err) ->
-    callback err
+    mongoose.model 'Tasks', @db
+    @db = mongoose.model 'Tasks'
 
-Tasks.all_task = (req, res, callback) ->
-  Tasks.find {}, (err, tasks) ->
-    callback err, tasks
+  add_task: (req, res, callback) ->
+    new @db({title: req.body.title, description: req.body.description, url: req.body.url}).save (err) ->
+      callback err
 
-module.exports = Tasks
+  del_task: (req, res, callback) ->
+    @db.remove {_id: req.params.id}, (err) ->
+      callback err
+
+  all_task: (req, res, callback) ->
+    @db.find {}, (err, tasks) ->
+      callback err, tasks
+
+module.exports.connect = (db) ->
+  new Tasks(db)
