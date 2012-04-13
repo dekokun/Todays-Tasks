@@ -1,7 +1,7 @@
 (function() {
   var Todos;
 
-  Todos = require("../model/todo");
+  Todos = require("../model/todo").connect('mongodb://localhost/everydaystasks');
 
   exports.todo = function(req, res) {
     return Todos.list(function(err, todos) {

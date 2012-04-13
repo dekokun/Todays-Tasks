@@ -1,11 +1,27 @@
 (function() {
-  var Todos, routes, should;
+  var db, mongoose, routes, should;
+
+  db = 'mongodb://localhost/test';
+
+  mongoose = require('mongoose');
 
   routes = require("../routes/todo");
 
   should = require("should");
 
-  Todos = require("../model/todo");
+  mongoose.connect(db);
+
+  db = new mongoose.Schema({
+    title: String,
+    description: String,
+    completed: Boolean,
+    nice: Number,
+    "default": 0
+  });
+
+  mongoose.model('Todos', db);
+
+  db = mongoose.model('Todos');
 
   describe("routes", function() {
     var req, res;
@@ -19,7 +35,7 @@
     };
     return describe("todo", function() {
       beforeEach(function(done) {
-        return new Todos({
+        return new db({
           title: 'hogehogetitle',
           description: 'fugafuga',
           completed: true
@@ -28,7 +44,7 @@
         });
       });
       afterEach(function(done) {
-        return Todos.remove({
+        return db.remove({
           title: 'hogehogetitle'
         }, function(err) {
           return done(err);

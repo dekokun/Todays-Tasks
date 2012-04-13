@@ -1,4 +1,4 @@
-Todos = require("../model/todo")
+Todos = require("../model/todo").connect 'mongodb://localhost/everydaystasks'
 
 exports.todo = (req, res) ->
   Todos.list (err, todos) ->

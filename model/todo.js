@@ -1,50 +1,59 @@
 (function() {
   var Todos, mongoose;
 
-  mongoose = require('./db');
+  mongoose = require('mongoose');
 
-  Todos = new mongoose.Schema({
-    title: String,
-    description: String,
-    completed: Boolean,
-    nice: Number,
-    "default": 0
-  });
+  Todos = (function() {
 
-  mongoose.model('Todos', Todos);
-
-  Todos = mongoose.model('Todos');
-
-  Todos.list = function(callback) {
-    return this.find({}, function(err, todos) {
-      todos.sort(function(a, b) {
-        var _ref, _ref2;
-        a.nice = (_ref = a.nice) != null ? _ref : 0;
-        b.nice = (_ref2 = b.nice) != null ? _ref2 : 0;
-        if (a.completed === b.completed) {
-          return b.nice - a.nice;
-        } else if (a.completed) {
-          return 1;
-        } else {
-          return -1;
-        }
+    function Todos(db) {
+      mongoose.connect(db);
+      this.db = new mongoose.Schema({
+        title: String,
+        description: String,
+        completed: Boolean,
+        nice: Number,
+        "default": 0
       });
-      return callback(err, todos);
-    });
-  };
+      mongoose.model('Todos', this.db);
+      this.db = mongoose.model('Todos');
+    }
 
-  Todos.add_todo = function(title, description, completed, callback) {
-    if (!completed) completed = false;
-    return new Todos({
-      title: title,
-      description: description,
-      completed: completed,
-      nice: 0
-    }).save(function(err) {
-      return callback(err);
-    });
-  };
+    Todos.prototype.list = function(callback) {
+      return this.db.find({}, function(err, todos) {
+        todos.sort(function(a, b) {
+          var _ref, _ref2;
+          a.nice = (_ref = a.nice) != null ? _ref : 0;
+          b.nice = (_ref2 = b.nice) != null ? _ref2 : 0;
+          if (a.completed === b.completed) {
+            return b.nice - a.nice;
+          } else if (a.completed) {
+            return 1;
+          } else {
+            return -1;
+          }
+        });
+        return callback(err, todos);
+      });
+    };
 
-  module.exports = Todos;
+    Todos.prototype.add_todo = function(title, description, completed, callback) {
+      if (!completed) completed = false;
+      return new this.db({
+        title: title,
+        description: description,
+        completed: completed,
+        nice: 0
+      }).save(function(err) {
+        return callback(err);
+      });
+    };
+
+    return Todos;
+
+  })();
+
+  module.exports.connect = function(db) {
+    return new Todos(db);
+  };
 
 }).call(this);

@@ -1,17 +1,35 @@
 (function() {
-  var Todos, should;
+  var Todos, db, mongoose, should;
 
-  Todos = process.env.TEST_COV ? require("../model-cov/todo") : require("../model/todo");
+  db = 'mongodb://localhost/test';
+
+  Todos = process.env.TEST_COV ? require("../model-cov/todo").connect(db) : require("../model/todo").connect(db);
+
+  mongoose = require('mongoose');
 
   should = require("should");
 
+  mongoose.connect(db);
+
+  db = new mongoose.Schema({
+    title: String,
+    description: String,
+    completed: Boolean,
+    nice: Number,
+    "default": 0
+  });
+
+  mongoose.model('Todos', this.db);
+
+  db = mongoose.model('Todos');
+
   describe("Todos", function() {
     afterEach(function(done) {
-      Todos.remove({}, function(err) {
+      db.remove({}, function(err) {
         return done(err);
       });
       return beforeEach(function(done) {
-        return Todos.remove({}, function(err) {
+        return db.remove({}, function(err) {
           return done(err);
         });
       });
@@ -19,8 +37,8 @@
     describe("todo_list", function() {
       describe("todoがひとつだけ", function() {
         beforeEach(function(done) {
-          return Todos.remove({}, function() {
-            return new Todos({
+          return db.remove({}, function() {
+            return new db({
               title: 'hogehogetitle',
               description: 'fugafuga',
               completed: true
@@ -48,18 +66,18 @@
       });
       return describe("todoが3つ", function() {
         beforeEach(function(done) {
-          return Todos.remove({}, function() {
-            return new Todos({
+          return db.remove({}, function() {
+            return new db({
               title: 'false',
               description: 'fugafuga',
               completed: false
             }).save(function(err) {
-              return new Todos({
+              return new db({
                 title: 'hogehogetitle',
                 description: 'fugafuga',
                 completed: true
               }).save(function(err) {
-                return new Todos({
+                return new db({
                   title: 'nice',
                   description: 'fugafuga',
                   completed: false,
@@ -101,7 +119,7 @@
       it("completedがfalseになっていること", function(done) {
         var callback;
         callback = function(err) {
-          return Todos.findOne({
+          return db.findOne({
             title: 'hoge'
           }, function(err, todo) {
             todo.completed.should.be["false"];
@@ -113,7 +131,7 @@
       it("niceが存在すること", function(done) {
         var callback;
         callback = function(err) {
-          return Todos.findOne({
+          return db.findOne({
             title: 'hoge'
           }, function(err, todo) {
             todo.nice.should.be.exist;
@@ -125,7 +143,7 @@
       return it("niceの値が0であること", function(done) {
         var callback;
         callback = function(err) {
-          return Todos.findOne({
+          return db.findOne({
             title: 'hoge'
           }, function(err, todo) {
             (todo.nice - 0).should.be.equal(0);
