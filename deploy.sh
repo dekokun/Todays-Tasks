@@ -36,7 +36,6 @@ case $1 in
   deploy)
     git push origin $MASTER_BRANCH || exit 1
     open $TRAVIS_URL || exit
-    bundle exec cap product deploy
     open -a Firefox $PRODUCT_URL
     ;;
   test)
