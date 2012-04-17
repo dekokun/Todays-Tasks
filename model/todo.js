@@ -48,6 +48,18 @@
       });
     };
 
+    Todos.prototype.completed_change = function(id, completed, callback) {
+      return this.db.update({
+        _id: id
+      }, {
+        $set: {
+          completed: completed
+        }
+      }, function(err) {
+        return callback(err);
+      });
+    };
+
     return Todos;
 
   })();

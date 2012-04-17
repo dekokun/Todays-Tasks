@@ -27,20 +27,14 @@
     });
   };
 
-  exports.change = function(req, res) {
+  exports.completed_toggle = function(req, res) {
     var completed;
     if (req.body.completed === "false" || !req.body.completed) {
       completed = false;
     } else {
       completed = true;
     }
-    return Todos.update({
-      _id: req.params.id
-    }, {
-      $set: {
-        completed: completed
-      }
-    }, function(err) {
+    return Todos.completed_change(req.params.id, completed, function(err) {
       return res.redirect('/todo');
     });
   };

@@ -31,7 +31,7 @@ app.get "/", index.index
 app.get "/todo", todo.todo
 app.post "/todo", todo.add
 app.put "/todo/:id/nice", todo.nice
-app.put "/todo/:id", todo.change
+app.put "/todo/:id", todo.completed_toggle
 app.del "/todo/:id", todo.del
 
 app.get "/task", task.tasks
