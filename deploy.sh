@@ -36,6 +36,7 @@ case $1 in
   deploy)
     git push origin $MASTER_BRANCH || exit 1
     open $TRAVIS_URL || exit
+    sleep 1
     open -a Firefox $PRODUCT_URL
     ;;
   test)
