@@ -13,7 +13,7 @@ exports.add = (req, res) ->
 
 exports.del = (req, res) ->
   req.flash('alert-info', '削除しました')
-  Todos.remove {_id: req.params.id}, (err) ->
+  Todos.removeById req.params.id, (err) ->
     res.redirect('/todo')
 
 exports.completed_toggle = (req, res) ->

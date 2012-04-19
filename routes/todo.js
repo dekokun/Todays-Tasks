@@ -20,9 +20,7 @@
 
   exports.del = function(req, res) {
     req.flash('alert-info', '削除しました');
-    return Todos.remove({
-      _id: req.params.id
-    }, function(err) {
+    return Todos.removeById(req.params.id, function(err) {
       return res.redirect('/todo');
     });
   };

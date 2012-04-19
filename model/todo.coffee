@@ -39,5 +39,9 @@ class Todos
     @db.update {_id: id}, { $set: {completed: completed}}, (err) ->
       callback err
 
+  removeById: (id, callback) ->
+    @db.remove {_id: id}, (err) ->
+      callback err
+
 module.exports.connect = (db) ->
   new Todos(db)

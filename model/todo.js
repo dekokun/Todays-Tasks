@@ -60,6 +60,14 @@
       });
     };
 
+    Todos.prototype.removeById = function(id, callback) {
+      return this.db.remove({
+        _id: id
+      }, function(err) {
+        return callback(err);
+      });
+    };
+
     return Todos;
 
   })();
