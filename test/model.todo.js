@@ -25,13 +25,13 @@
 
   describe("Todos", function() {
     afterEach(function(done) {
-      db.remove({}, function(err) {
+      return db.remove({}, function(err) {
         return done(err);
       });
-      return beforeEach(function(done) {
-        return db.remove({}, function(err) {
-          return done(err);
-        });
+    });
+    beforeEach(function(done) {
+      return db.remove({}, function(err) {
+        return done(err);
       });
     });
     describe("todo_list", function() {

@@ -22,9 +22,9 @@ describe "Todos", ->
   afterEach (done) ->
     db.remove {}, (err) ->
       done(err)
-    beforeEach (done) ->
-      db.remove {}, (err)->
-        done(err)
+  beforeEach (done) ->
+    db.remove {}, (err)->
+      done(err)
 
   describe "todo_list", ->
 
