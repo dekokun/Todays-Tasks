@@ -53,7 +53,7 @@ case $1 in
     coffee -wc public/javascript/ &
     coffee -wc test/ &
     mongo_run=`ps aux | grep '[m]ongo'`
-    if [ -z $mongo_run ]; then
+    if [ -z "$mongo_run" ]; then
       mongod run &
     fi
     node-dev app.js
