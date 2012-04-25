@@ -49,4 +49,21 @@
     });
   };
 
+  exports.edit = function(req, res) {
+    return Todos.findOne({
+      _id: req.params.id
+    }, function(err, todo) {
+      return res.render('todoEdit', {
+        todo: todo,
+        title: 'edit'
+      });
+    });
+  };
+
+  exports.update = function(req, res) {
+    return Todos.update(req.params.id, req.body.title, req.body.description, function(err) {
+      return res.redirect('/todo');
+    });
+  };
+
 }).call(this);

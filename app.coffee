@@ -30,7 +30,9 @@ app.get "/", index.index
 
 app.get "/todo", todo.todo
 app.post "/todo", todo.add
+app.get "/todo/:id", todo.edit
 app.put "/todo/:id/nice", todo.nice
+app.put "/todo/:id", todo.update
 app.put "/todo/:id/completeChange", todo.completeChange
 app.del "/todo/:id", todo.del
 

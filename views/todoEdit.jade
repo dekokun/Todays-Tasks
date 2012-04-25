@@ -1,0 +1,12 @@
+section
+  h3 TODO編集
+  form(action='/todo/' + todo._id, method= 'POST')
+    input(type='hidden', name='_method', value='put')
+    dl
+      dt TODO名
+      dd
+        input(name='title', value=todo.title)
+      dt 説明
+      dd
+        input(name='description', value=todo.description)
+    input(type='submit')

@@ -28,3 +28,13 @@ exports.nice = (req, res) ->
   Todos.update {_id: req.params.id}, { $inc: {nice: 1}}, (err) ->
     res.redirect('/todo')
 
+exports.edit = (req, res) ->
+  Todos.findOne {_id: req.params.id}, (err, todo) ->
+    res.render('todoEdit', {
+      todo: todo,
+      title: 'edit'
+    })
+
+exports.update = (req, res) ->
+  Todos.update req.params.id, req.body.title, req.body.description, (err) ->
+    res.redirect('/todo')
