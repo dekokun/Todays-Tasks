@@ -16,12 +16,12 @@ exports.del = (req, res) ->
   Todos.remove req.params.id, (err) ->
     res.redirect('/todo')
 
-exports.completed_toggle = (req, res) ->
+exports.completeChange = (req, res) ->
   if (req.body.completed == "false" || !req.body.completed)
     completed = false
   else
     completed = true
-  Todos.completed_change req.params.id, completed, (err) ->
+  Todos.completeChange req.params.id, completed, (err) ->
     res.redirect('/todo')
 
 exports.nice = (req, res) ->

@@ -48,7 +48,7 @@
       });
     };
 
-    Todos.prototype.completed_change = function(id, completed, callback) {
+    Todos.prototype.completeChange = function(id, completed, callback) {
       return this.db.update({
         _id: id
       }, {
