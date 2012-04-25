@@ -153,7 +153,7 @@
         return Todos.add('hoge', 'fuga', void 0, callback);
       });
     });
-    return describe("remove", function() {
+    describe("remove", function() {
       var testTodo;
       testTodo = {};
       beforeEach(function(done) {
@@ -182,6 +182,94 @@
           });
         };
         return Todos.remove(testTodo._id, callback);
+      });
+    });
+    return describe("completeChange", function() {
+      describe("最初がtrueの時", function() {
+        var id;
+        id = {};
+        beforeEach(function(done) {
+          return new db({
+            title: 'hogehogetitle',
+            description: 'fugafuga',
+            completed: true
+          }).save(function(err) {
+            if (err) done(err);
+            return db.findOne({
+              title: 'hogehogetitle'
+            }, function(err, todo) {
+              id = todo._id;
+              return done(err);
+            });
+          });
+        });
+        it("falseをセットすればfalseになる", function(done) {
+          var callback;
+          callback = function(err) {
+            return db.findOne({
+              title: 'hogehogetitle'
+            }, function(err, todo) {
+              todo.completed.should.be["false"];
+              return done(err);
+            });
+          };
+          return Todos.completeChange(id, false, callback);
+        });
+        return it("trueをセットすればtrueになる", function(done) {
+          var callback;
+          callback = function(err) {
+            return db.findOne({
+              title: 'hogehogetitle'
+            }, function(err, todo) {
+              todo.completed.should.be["true"];
+              return done(err);
+            });
+          };
+          return Todos.completeChange(id, true, callback);
+        });
+      });
+      return describe("最初がfalseの時", function() {
+        var id;
+        id = {};
+        beforeEach(function(done) {
+          return new db({
+            title: 'hogehogetitle',
+            description: 'fugafuga',
+            completed: false
+          }).save(function(err) {
+            if (err) done(err);
+            return db.findOne({
+              title: 'hogehogetitle'
+            }, function(err, todo) {
+              id = todo._id;
+              return done(err);
+            });
+          });
+        });
+        it("falseをセットすればfalseになる", function(done) {
+          var callback;
+          callback = function(err) {
+            return db.findOne({
+              title: 'hogehogetitle'
+            }, function(err, todo) {
+              todo.completed.should.be["false"];
+              return done(err);
+            });
+          };
+          return Todos.completeChange(id, false, callback);
+        });
+        return it("trueをセットすればtrueになる", function(done) {
+          var callback;
+          callback = function(err) {
+            return db.findOne({
+              title: 'hogehogetitle'
+            }, function(err, todo) {
+              todo.completed.should.be["true"];
+              return done(err);
+            });
+          };
+          return Todos.completeChange(id, true, callback);
+        });
       });
     });
   });

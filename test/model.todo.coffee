@@ -110,3 +110,45 @@ describe "Todos", ->
           should.not.exist todo
           done err
       Todos.remove testTodo._id, callback
+
+  describe "completeChange", ->
+    describe "最初がtrueの時", ->
+      id = {}
+      beforeEach (done) ->
+        new db({title: 'hogehogetitle', description: 'fugafuga', completed: true}).save (err) ->
+          done err if err
+          db.findOne {title: 'hogehogetitle'}, (err, todo) ->
+            id = todo._id
+            done err
+      it "falseをセットすればfalseになる", (done) ->
+        callback = (err) ->
+          db.findOne {title: 'hogehogetitle'}, (err, todo) ->
+            todo.completed.should.be.false
+            done err
+        Todos.completeChange id, false, callback
+      it "trueをセットすればtrueになる", (done) ->
+        callback = (err) ->
+          db.findOne {title: 'hogehogetitle'}, (err, todo) ->
+            todo.completed.should.be.true
+            done err
+        Todos.completeChange id, true, callback
+    describe "最初がfalseの時", ->
+      id = {}
+      beforeEach (done) ->
+        new db({title: 'hogehogetitle', description: 'fugafuga', completed: false}).save (err) ->
+          done err if err
+          db.findOne {title: 'hogehogetitle'}, (err, todo) ->
+            id = todo._id
+            done err
+      it "falseをセットすればfalseになる", (done) ->
+        callback = (err) ->
+          db.findOne {title: 'hogehogetitle'}, (err, todo) ->
+            todo.completed.should.be.false
+            done err
+        Todos.completeChange id, false, callback
+      it "trueをセットすればtrueになる", (done) ->
+        callback = (err) ->
+          db.findOne {title: 'hogehogetitle'}, (err, todo) ->
+            todo.completed.should.be.true
+            done err
+        Todos.completeChange id, true, callback
