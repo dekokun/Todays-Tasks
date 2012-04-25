@@ -1,9 +1,10 @@
 != messages()
-h3 TODO一覧
-ul!= partial('todo', todos)
+section
+  h3 TODO一覧
+  ul!= partial('todo', todos)
 
 section
-  h4 新規TODO
+  h3 新規TODO
   form(action='/todo', method= 'POST')
     input(type='hidden', name='deleted')
     dl
