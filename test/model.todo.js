@@ -115,7 +115,7 @@
         });
       });
     });
-    return describe("add_todo", function() {
+    describe("add_todo", function() {
       it("completedがfalseになっていること", function(done) {
         var callback;
         callback = function(err) {
@@ -151,6 +151,37 @@
           });
         };
         return Todos.add_todo('hoge', 'fuga', void 0, callback);
+      });
+    });
+    return describe("removeById", function() {
+      var testTodo;
+      testTodo = {};
+      beforeEach(function(done) {
+        return new db({
+          title: 'hogehogetitle',
+          description: 'fugafuga',
+          completed: true
+        }).save(function(err) {
+          if (err) done(err);
+          return db.findOne({
+            title: 'hogehogetitle'
+          }, function(err, todo) {
+            testTodo = todo;
+            return done(err);
+          });
+        });
+      });
+      return it("削除したものは存在しないこと", function(done) {
+        var callback;
+        callback = function(err) {
+          return db.findOne({
+            title: 'hogehogetitle'
+          }, function(err, todo) {
+            should.not.exist(todo);
+            return done(err);
+          });
+        };
+        return Todos.removeById(testTodo._id, callback);
       });
     });
   });

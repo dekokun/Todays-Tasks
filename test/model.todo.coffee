@@ -95,3 +95,18 @@ describe "Todos", ->
           (todo.nice - 0).should.be.equal 0
           done err
       Todos.add_todo 'hoge', 'fuga', undefined, callback
+
+  describe "removeById", ->
+    testTodo = {}
+    beforeEach (done) ->
+      new db({title: 'hogehogetitle', description: 'fugafuga', completed: true}).save (err) ->
+        done err if err
+        db.findOne {title: 'hogehogetitle'}, (err, todo) ->
+          testTodo = todo
+          done err
+    it "削除したものは存在しないこと", (done) ->
+      callback = (err) ->
+        db.findOne {title: 'hogehogetitle'}, (err, todo) ->
+          should.not.exist todo
+          done err
+      Todos.removeById testTodo._id, callback
