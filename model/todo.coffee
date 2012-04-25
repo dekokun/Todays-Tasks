@@ -29,7 +29,7 @@ class Todos
       callback(err, todos)
     )
 
-  add_todo: (title, description, completed, callback) ->
+  add: (title, description, completed, callback) ->
     if !completed
       completed = false
     new @db({title: title, description: description, completed: completed, nice:0}).save (err) ->

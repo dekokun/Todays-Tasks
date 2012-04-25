@@ -36,7 +36,7 @@
       });
     };
 
-    Todos.prototype.add_todo = function(title, description, completed, callback) {
+    Todos.prototype.add = function(title, description, completed, callback) {
       if (!completed) completed = false;
       return new this.db({
         title: title,

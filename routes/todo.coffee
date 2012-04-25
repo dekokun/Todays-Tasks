@@ -8,7 +8,7 @@ exports.todo = (req, res) ->
     })
 
 exports.add = (req, res) ->
-  Todos.add_todo req.body.title, req.body.description, req.body.completed, (err) ->
+  Todos.add req.body.title, req.body.description, req.body.completed, (err) ->
     res.redirect('/todo')
 
 exports.del = (req, res) ->

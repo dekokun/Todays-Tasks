@@ -72,13 +72,13 @@ describe "Todos", ->
           done()
         Todos.list callback
 
-  describe "add_todo", ->
+  describe "add", ->
     it "completedがfalseになっていること", (done) ->
       callback = (err) ->
         db.findOne {title: 'hoge'}, (err, todo) ->
           todo.completed.should.be.false
           done err
-      Todos.add_todo 'hoge', 'fuga', undefined, callback
+      Todos.add 'hoge', 'fuga', undefined, callback
 
     # nice.todoがNumberをコンストラクタとするオブジェクトのため、
     # 比較ができない
@@ -88,13 +88,13 @@ describe "Todos", ->
         db.findOne {title: 'hoge'}, (err, todo) ->
           todo.nice.should.be.exist
           done err
-      Todos.add_todo 'hoge', 'fuga', undefined, callback
+      Todos.add 'hoge', 'fuga', undefined, callback
     it "niceの値が0であること", (done) ->
       callback = (err) ->
         db.findOne {title: 'hoge'}, (err, todo) ->
           (todo.nice - 0).should.be.equal 0
           done err
-      Todos.add_todo 'hoge', 'fuga', undefined, callback
+      Todos.add 'hoge', 'fuga', undefined, callback
 
   describe "removeById", ->
     testTodo = {}

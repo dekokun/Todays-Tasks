@@ -115,7 +115,7 @@
         });
       });
     });
-    describe("add_todo", function() {
+    describe("add", function() {
       it("completedがfalseになっていること", function(done) {
         var callback;
         callback = function(err) {
@@ -126,7 +126,7 @@
             return done(err);
           });
         };
-        return Todos.add_todo('hoge', 'fuga', void 0, callback);
+        return Todos.add('hoge', 'fuga', void 0, callback);
       });
       it("niceが存在すること", function(done) {
         var callback;
@@ -138,7 +138,7 @@
             return done(err);
           });
         };
-        return Todos.add_todo('hoge', 'fuga', void 0, callback);
+        return Todos.add('hoge', 'fuga', void 0, callback);
       });
       return it("niceの値が0であること", function(done) {
         var callback;
@@ -150,7 +150,7 @@
             return done(err);
           });
         };
-        return Todos.add_todo('hoge', 'fuga', void 0, callback);
+        return Todos.add('hoge', 'fuga', void 0, callback);
       });
     });
     return describe("removeById", function() {
