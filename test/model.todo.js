@@ -184,7 +184,7 @@
         return Todos.remove(id, callback);
       });
     });
-    return describe("completeChange", function() {
+    describe("completeChange", function() {
       describe("最初がtrueの時", function() {
         var id;
         id = {};
@@ -270,6 +270,53 @@
           };
           return Todos.completeChange(id, true, callback);
         });
+      });
+    });
+    return describe("update", function() {
+      var id;
+      id = {};
+      beforeEach(function(done) {
+        var beforeTitle;
+        beforeTitle = 'title1';
+        return new db({
+          title: beforeTitle,
+          description: 'hogehogedescription',
+          completed: true
+        }).save(function(err) {
+          if (err) done(err);
+          return db.findOne({
+            title: beforeTitle
+          }, function(err, todo) {
+            id = todo._id;
+            return done(err);
+          });
+        });
+      });
+      it("titleが変わっている", function(done) {
+        var afterTitle, callback;
+        afterTitle = "title2";
+        callback = function(err) {
+          return db.findOne({
+            _id: id
+          }, function(err, todo) {
+            todo.title.should.be.equal(afterTitle);
+            return done(err);
+          });
+        };
+        return Todos.update(id, afterTitle, 'hoge', callback);
+      });
+      return it("descriptionが変わっている", function(done) {
+        var afterDescription, callback;
+        afterDescription = "description2";
+        callback = function(err) {
+          return db.findOne({
+            _id: id
+          }, function(err, todo) {
+            todo.description.should.be.equal(afterDescription);
+            return done(err);
+          });
+        };
+        return Todos.update(id, 'hoge', afterDescription, callback);
       });
     });
   });

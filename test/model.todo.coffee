@@ -152,3 +152,27 @@ describe "Todos", ->
             todo.completed.should.be.true
             done err
         Todos.completeChange id, true, callback
+
+  describe "update", ->
+    id = {}
+    beforeEach (done) ->
+      beforeTitle = 'title1'
+      new db({title: beforeTitle, description: 'hogehogedescription', completed: true}).save (err) ->
+        done err if err
+        db.findOne {title: beforeTitle}, (err, todo) ->
+          id = todo._id
+          done err
+    it "titleが変わっている", (done) ->
+      afterTitle = "title2"
+      callback = (err) ->
+        db.findOne {_id: id}, (err, todo) ->
+          todo.title.should.be.equal afterTitle
+          done err
+      Todos.update id, afterTitle, 'hoge', callback
+    it "descriptionが変わっている", (done) ->
+      afterDescription = "description2"
+      callback = (err) ->
+        db.findOne {_id: id}, (err, todo) ->
+          todo.description.should.be.equal afterDescription
+          done err
+      Todos.update id, 'hoge', afterDescription, callback

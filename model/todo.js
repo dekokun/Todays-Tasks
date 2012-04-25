@@ -48,6 +48,19 @@
       });
     };
 
+    Todos.prototype.update = function(id, title, description, callback) {
+      return this.db.update({
+        _id: id
+      }, {
+        $set: {
+          title: title,
+          description: description
+        }
+      }, function(err) {
+        return callback(err);
+      });
+    };
+
     Todos.prototype.completeChange = function(id, completed, callback) {
       return this.db.update({
         _id: id

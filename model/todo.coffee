@@ -35,6 +35,10 @@ class Todos
     new @db({title: title, description: description, completed: completed, nice:0}).save (err) ->
       callback err
 
+  update: (id, title, description, callback) ->
+    @db.update {_id: id}, { $set: {title:title, description:description}}, (err) ->
+      callback err
+
   completeChange: (id, completed, callback) ->
     @db.update {_id: id}, { $set: {completed: completed}}, (err) ->
       callback err
