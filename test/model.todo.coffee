@@ -176,3 +176,27 @@ describe "Todos", ->
           todo.description.should.be.equal afterDescription
           done err
       Todos.update id, 'hoge', afterDescription, callback
+
+  describe "findOne", ->
+    id = {}
+    searchTitle = 'hogehoge'
+    beforeEach (done) ->
+      new db({title: searchTitle}).save (err) ->
+        done err if err
+        new db({title: 'hogehogeTitle'}).save (err) ->
+          db.findOne {title: searchTitle}, (err, todo) ->
+            id = todo._id
+            done err
+    it "title検索でdb.findOneと同じものが取得できている", (done) ->
+      callback = (err) ->
+        db.findOne {_id: id}, (err, todo) ->
+          todo._id.should.be.eql id
+          done err
+      Todos.findOne {title:searchTitle}, callback
+
+    it "id検索でdb.findOneと同じものが取得できている", (done) ->
+      callback = (err) ->
+        db.findOne {_id: id}, (err, todo) ->
+          todo.title.should.be.eql searchTitle
+          done err
+      Todos.findOne {_id:id}, callback

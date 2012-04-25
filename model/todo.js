@@ -81,6 +81,10 @@
       });
     };
 
+    Todos.prototype.findOne = function(obj, callback) {
+      return this.db.findOne(obj, callback);
+    };
+
     return Todos;
 
   })();

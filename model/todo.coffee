@@ -47,5 +47,8 @@ class Todos
     @db.remove {_id: id}, (err) ->
       callback err
 
+  findOne: (obj, callback) ->
+    @db.findOne obj, callback
+
 module.exports.connect = (db) ->
   new Todos(db)

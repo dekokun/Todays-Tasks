@@ -272,7 +272,7 @@
         });
       });
     });
-    return describe("update", function() {
+    describe("update", function() {
       var id;
       id = {};
       beforeEach(function(done) {
@@ -317,6 +317,56 @@
           });
         };
         return Todos.update(id, 'hoge', afterDescription, callback);
+      });
+    });
+    return describe("findOne", function() {
+      var id, searchTitle;
+      id = {};
+      searchTitle = 'hogehoge';
+      beforeEach(function(done) {
+        return new db({
+          title: searchTitle
+        }).save(function(err) {
+          if (err) done(err);
+          return new db({
+            title: 'hogehogeTitle'
+          }).save(function(err) {
+            return db.findOne({
+              title: searchTitle
+            }, function(err, todo) {
+              id = todo._id;
+              return done(err);
+            });
+          });
+        });
+      });
+      it("title検索でdb.findOneと同じものが取得できている", function(done) {
+        var callback;
+        callback = function(err) {
+          return db.findOne({
+            _id: id
+          }, function(err, todo) {
+            todo._id.should.be.eql(id);
+            return done(err);
+          });
+        };
+        return Todos.findOne({
+          title: searchTitle
+        }, callback);
+      });
+      return it("id検索でdb.findOneと同じものが取得できている", function(done) {
+        var callback;
+        callback = function(err) {
+          return db.findOne({
+            _id: id
+          }, function(err, todo) {
+            todo.title.should.be.eql(searchTitle);
+            return done(err);
+          });
+        };
+        return Todos.findOne({
+          _id: id
+        }, callback);
       });
     });
   });
