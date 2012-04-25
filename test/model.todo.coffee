@@ -96,7 +96,7 @@ describe "Todos", ->
           done err
       Todos.add 'hoge', 'fuga', undefined, callback
 
-  describe "removeById", ->
+  describe "remove", ->
     testTodo = {}
     beforeEach (done) ->
       new db({title: 'hogehogetitle', description: 'fugafuga', completed: true}).save (err) ->
@@ -109,4 +109,4 @@ describe "Todos", ->
         db.findOne {title: 'hogehogetitle'}, (err, todo) ->
           should.not.exist todo
           done err
-      Todos.removeById testTodo._id, callback
+      Todos.remove testTodo._id, callback

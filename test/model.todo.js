@@ -153,7 +153,7 @@
         return Todos.add('hoge', 'fuga', void 0, callback);
       });
     });
-    return describe("removeById", function() {
+    return describe("remove", function() {
       var testTodo;
       testTodo = {};
       beforeEach(function(done) {
@@ -181,7 +181,7 @@
             return done(err);
           });
         };
-        return Todos.removeById(testTodo._id, callback);
+        return Todos.remove(testTodo._id, callback);
       });
     });
   });

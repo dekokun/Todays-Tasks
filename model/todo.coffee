@@ -39,7 +39,7 @@ class Todos
     @db.update {_id: id}, { $set: {completed: completed}}, (err) ->
       callback err
 
-  removeById: (id, callback) ->
+  remove: (id, callback) ->
     @db.remove {_id: id}, (err) ->
       callback err
 
