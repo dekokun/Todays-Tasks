@@ -1,7 +1,4 @@
 != messages()
-section
-  h3 TODO一覧
-  ul!= partial('todo', todos)
 
 section
   h3 新規TODO
@@ -15,3 +12,7 @@ section
       dd
         input(name='description')
     input(type='submit')
+
+section
+  h3 TODO一覧
+  ul!= partial('todo', todos)
