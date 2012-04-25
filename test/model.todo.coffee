@@ -97,19 +97,19 @@ describe "Todos", ->
       Todos.add 'hoge', 'fuga', undefined, callback
 
   describe "remove", ->
-    testTodo = {}
+    id = {}
     beforeEach (done) ->
       new db({title: 'hogehogetitle', description: 'fugafuga', completed: true}).save (err) ->
         done err if err
         db.findOne {title: 'hogehogetitle'}, (err, todo) ->
-          testTodo = todo
+          id = todo._id
           done err
     it "削除したものは存在しないこと", (done) ->
       callback = (err) ->
         db.findOne {title: 'hogehogetitle'}, (err, todo) ->
           should.not.exist todo
           done err
-      Todos.remove testTodo._id, callback
+      Todos.remove id, callback
 
   describe "completeChange", ->
     describe "最初がtrueの時", ->

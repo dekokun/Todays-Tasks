@@ -154,8 +154,8 @@
       });
     });
     describe("remove", function() {
-      var testTodo;
-      testTodo = {};
+      var id;
+      id = {};
       beforeEach(function(done) {
         return new db({
           title: 'hogehogetitle',
@@ -166,7 +166,7 @@
           return db.findOne({
             title: 'hogehogetitle'
           }, function(err, todo) {
-            testTodo = todo;
+            id = todo._id;
             return done(err);
           });
         });
@@ -181,7 +181,7 @@
             return done(err);
           });
         };
-        return Todos.remove(testTodo._id, callback);
+        return Todos.remove(id, callback);
       });
     });
     return describe("completeChange", function() {
