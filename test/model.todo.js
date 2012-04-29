@@ -15,7 +15,6 @@
     title: String,
     description: String,
     completed: Boolean,
-    nice: Number,
     "default": 0
   });
 
@@ -80,8 +79,7 @@
                 return new db({
                   title: 'nice',
                   description: 'fugafuga',
-                  completed: false,
-                  nice: 2
+                  completed: false
                 }).save(function(err) {
                   return done(err);
                 });
@@ -97,18 +95,10 @@
           };
           return Todos.list(callback);
         });
-        it("niceが高いものが1番にくること", function(done) {
-          var callback;
-          callback = function(err, todos) {
-            todos[0].title.should.be.equal('nice');
-            return done();
-          };
-          return Todos.list(callback);
-        });
         return it("完了していないものが2番にくること", function(done) {
           var callback;
           callback = function(err, todos) {
-            todos[1].title.should.be.equal('false');
+            todos[1].completed.should.be.equal(false);
             return done();
           };
           return Todos.list(callback);
@@ -116,37 +106,13 @@
       });
     });
     describe("add", function() {
-      it("completedがfalseになっていること", function(done) {
+      return it("completedがfalseになっていること", function(done) {
         var callback;
         callback = function(err) {
           return db.findOne({
             title: 'hoge'
           }, function(err, todo) {
             todo.completed.should.be["false"];
-            return done(err);
-          });
-        };
-        return Todos.add('hoge', 'fuga', void 0, callback);
-      });
-      it("niceが存在すること", function(done) {
-        var callback;
-        callback = function(err) {
-          return db.findOne({
-            title: 'hoge'
-          }, function(err, todo) {
-            todo.nice.should.be.exist;
-            return done(err);
-          });
-        };
-        return Todos.add('hoge', 'fuga', void 0, callback);
-      });
-      return it("niceの値が0であること", function(done) {
-        var callback;
-        callback = function(err) {
-          return db.findOne({
-            title: 'hoge'
-          }, function(err, todo) {
-            (todo.nice - 0).should.be.equal(0);
             return done(err);
           });
         };

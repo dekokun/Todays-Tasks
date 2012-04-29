@@ -48,8 +48,6 @@
 
   app.get("/todo/:id", todo.edit);
 
-  app.put("/todo/:id/nice", todo.nice);
-
   app.put("/todo/:id", todo.update);
 
   app.put("/todo/:id/completeChange", todo.completeChange);

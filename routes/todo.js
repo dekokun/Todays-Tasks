@@ -50,18 +50,6 @@
     });
   };
 
-  exports.nice = function(req, res) {
-    return Todos.update({
-      _id: req.params.id
-    }, {
-      $inc: {
-        nice: 1
-      }
-    }, function(err) {
-      return res.redirect('/todo');
-    });
-  };
-
   exports.edit = function(req, res) {
     return Todos.findOne({
       _id: req.params.id

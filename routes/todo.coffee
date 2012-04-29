@@ -28,10 +28,6 @@ exports.completeChange = (req, res) ->
   Todos.completeChange req.params.id, completed, (err) ->
     res.redirect('/todo')
 
-exports.nice = (req, res) ->
-  Todos.update {_id: req.params.id}, { $inc: {nice: 1}}, (err) ->
-    res.redirect('/todo')
-
 exports.edit = (req, res) ->
   Todos.findOne {_id: req.params.id}, (err, todo) ->
     res.render('todoEdit', {
