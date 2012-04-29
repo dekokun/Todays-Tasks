@@ -47,6 +47,7 @@ case $1 in
     rm -rf model-cov
     ;;
   develop)
+    npm update
     git checkout $DEVELOP_BRANCH || exit 1
     coffee -wc app.coffee &
     coffee -wc routes/ &
