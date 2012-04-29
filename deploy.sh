@@ -1,5 +1,4 @@
 DEVELOP_URL=http://127.0.0.1:5001/
-PRODUCT_URL=http://10.128.32.112:443/
 TRAVIS_URL=http://travis-ci.org/#!/dekokun/Todays-Tasks/builds
 NOW_BRANCH=`cat .git/HEAD | cut -d'/' -f3`
 DEVELOP_BRANCH=development
@@ -36,8 +35,6 @@ case $1 in
   deploy)
     git push origin $MASTER_BRANCH || exit 1
     open $TRAVIS_URL || exit
-    sleep 1
-    open -a Firefox $PRODUCT_URL
     ;;
   test)
     npm test
