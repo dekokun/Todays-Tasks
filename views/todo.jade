@@ -16,3 +16,15 @@ section
 section
   h3 TODO一覧
   ul!= partial('todo', todos)
+
+script(type="text/javascript")
+  function showHide(targetID) {
+    if( document.getElementById(targetID)) {
+      console.log('hoge');
+      if( document.getElementById(targetID).style.display == "none") {
+        document.getElementById(targetID).style.display = "block";
+      } else {
+        document.getElementById(targetID).style.display = "none";
+      }
+    }
+  }
