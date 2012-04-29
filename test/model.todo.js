@@ -95,6 +95,14 @@
           };
           return Todos.list(callback);
         });
+        it("一番最後は完了してるものであること", function(done) {
+          var callback;
+          callback = function(err, todos) {
+            todos[2].completed.should.be.equal(true);
+            return done();
+          };
+          return Todos.list(callback);
+        });
         return it("完了していないものが2番にくること", function(done) {
           var callback;
           callback = function(err, todos) {

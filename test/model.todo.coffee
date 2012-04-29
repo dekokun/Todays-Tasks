@@ -59,6 +59,12 @@ describe "Todos", ->
           done()
         Todos.list callback
 
+      it "一番最後は完了してるものであること", (done) ->
+        callback = (err, todos) ->
+          todos[2].completed.should.be.equal true
+          done()
+        Todos.list callback
+
       it "完了していないものが2番にくること", (done) ->
         callback = (err, todos) ->
           todos[1].completed.should.be.equal false
