@@ -6,5 +6,5 @@ form(action='/todo/' + todo._id, method= 'POST')
       input(name='title', value=todo.title)
     dt 説明
     dd
-      input(name='description', value=todo.description)
+      textarea(name='description')= todo.description
   input(type='submit')

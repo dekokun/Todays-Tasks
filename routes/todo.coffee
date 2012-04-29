@@ -1,7 +1,11 @@
 Todos = require("../model/todo").connect 'mongodb://localhost/everydaystasks'
+markdown = require("markdown").markdown
 
 exports.todo = (req, res) ->
   Todos.list (err, todos) ->
+    todos = for todo in todos
+      todo["markdown"] = markdown.toHTML(todo.description)
+      todo
     res.render('todo', {
       todos: todos,
       title: 'TODO'

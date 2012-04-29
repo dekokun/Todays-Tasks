@@ -8,6 +8,7 @@
     , "jade": "*"
     , "mongoose": "*"
     , "express-messages": "*"
+    , "markdown": "*"
   }
   , "devDependencies": {
       "sinon": "*"

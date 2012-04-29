@@ -1,10 +1,23 @@
 (function() {
-  var Todos;
+  var Todos, markdown;
 
   Todos = require("../model/todo").connect('mongodb://localhost/everydaystasks');
 
+  markdown = require("markdown").markdown;
+
   exports.todo = function(req, res) {
     return Todos.list(function(err, todos) {
+      var todo;
+      todos = (function() {
+        var _i, _len, _results;
+        _results = [];
+        for (_i = 0, _len = todos.length; _i < _len; _i++) {
+          todo = todos[_i];
+          todo["markdown"] = markdown.toHTML(todo.description);
+          _results.push(todo);
+        }
+        return _results;
+      })();
       return res.render('todo', {
         todos: todos,
         title: 'TODO'
