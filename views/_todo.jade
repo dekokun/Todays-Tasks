@@ -12,8 +12,9 @@ li
   - else
     submit_value = '完了'
     button_value = true
-    p= todo.title 
-  p!= todo.markdown
+    section
+      h4= todo.title
+      section.markdown!= todo.markdown
   .form-group
     form(action='/todo/'+todo._id+'/completeChange', method= 'POST')
       input(type='hidden', name='_method', value='put')
