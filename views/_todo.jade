@@ -27,7 +27,7 @@ li
           input(type='hidden', name='_method', value='delete')
           i.icon-trash
           input.btn.btn-mini.btn-danger(type= 'submit', value='削除')
-      h5 子TODO追加
+      h4 子TODO追加
       div
         form(action='/todo', method= 'POST')
           input(type='hidden', name='parent', value=todo._id)
