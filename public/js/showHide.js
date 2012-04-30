@@ -1,5 +1,5 @@
 $(".toggle").collapse({
-  head: "h4",
+  head: "h3,h4,h5",
   group: "div, ul",
   show: function(){
         this.animate({

@@ -2,11 +2,12 @@ include mixins/todo
 
 != messages()
 
-section
+section.toggle
   h3 新規TODO
-  form(action='/todo', method= 'POST')
-    mixin edit({})
-    input(type='submit')
+  div
+    form(action='/todo', method= 'POST')
+      mixin edit({})
+      input(type='submit')
 
 section
   h3 TODO一覧
