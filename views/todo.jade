@@ -5,7 +5,6 @@ include mixins/todo
 section
   h3 新規TODO
   form(action='/todo', method= 'POST')
-    input(type='hidden', name='deleted')
     mixin edit({})
     input(type='submit')
 
