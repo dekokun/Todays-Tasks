@@ -1,10 +1,6 @@
+include mixins/todo
+
 form(action='/todo/' + todo._id, method= 'POST')
   input(type='hidden', name='_method', value='put')
-  dl
-    dt TODO名
-    dd
-      input(name='title', value=todo.title)
-    dt 説明
-    dd
-      textarea(name='description')= todo.description
+  mixin edit(todo)
   input(type='submit')

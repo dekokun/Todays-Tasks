@@ -1,16 +1,12 @@
+include mixins/todo
+
 != messages()
 
 section
   h3 新規TODO
   form(action='/todo', method= 'POST')
     input(type='hidden', name='deleted')
-    dl
-      dt TODO名
-      dd
-        input(name='title')
-      dt 説明
-      dd
-        textarea(name='description')
+    mixin edit({})
     input(type='submit')
 
 section

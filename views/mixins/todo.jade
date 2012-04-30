@@ -1,0 +1,8 @@
+mixin edit(todo)
+  dl
+    dt TODO名
+    dd
+      input(name='title', value=todo.title)
+    dt 説明
+    dd
+      textarea(name='description')= todo.description
