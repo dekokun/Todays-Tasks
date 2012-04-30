@@ -27,10 +27,10 @@ li
           input(type='hidden', name='_method', value='delete')
           i.icon-trash
           input.btn.btn-mini.btn-danger(type= 'submit', value='削除')
-      - if(todo.todos)
-        ul!= partial('todo', todo.todos)
       h5 子TODO追加
       form(action='/todo', method= 'POST')
         input(type='hidden', name='parent', value=todo._id)
         mixin edit({})
         input(type='submit')
+      - if(todo.todos)
+        ul!= partial('todo', todo.todos)
