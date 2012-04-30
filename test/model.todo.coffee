@@ -30,7 +30,7 @@ describe "Todos", ->
     describe "todoがひとつだけ", ->
       beforeEach (done) ->
         db.remove {}, ()->
-          new db({title: 'hogehogetitle', description: 'fugafuga', completed: true}).save (err) ->
+          new db({title: 'hogehogetitle', description: 'fugafuga', completed: true, isTop: true}).save (err) ->
             done(err)
 
       it "todosが配列であること", (done) ->
@@ -48,9 +48,9 @@ describe "Todos", ->
     describe "todoが3つ", ->
       beforeEach (done) ->
         db.remove {}, ()->
-          new db({title: 'false', description: 'fugafuga', completed: false}).save (err) ->
-            new db({title: 'hogehogetitle', description: 'fugafuga', completed: true}).save (err) ->
-              new db({title: 'nice', description: 'fugafuga', completed: false}).save (err) ->
+          new db({title: 'false', description: 'fugafuga', completed: false, isTop:true}).save (err) ->
+            new db({title: 'hogehogetitle', description: 'fugafuga', completed: true, isTop: true}).save (err) ->
+              new db({title: 'nice', description: 'fugafuga', completed: false, isTop: true}).save (err) ->
                 done(err)
 
       it "todosに3個要素があること", (done) ->
@@ -77,7 +77,7 @@ describe "Todos", ->
         db.findOne {title: 'hoge'}, (err, todo) ->
           todo.completed.should.be.false
           done err
-      Todos.add 'hoge', 'fuga', undefined, callback
+      Todos.add 'hoge', 'fuga', undefined, undefined, callback
 
   describe "remove", ->
     id = {}

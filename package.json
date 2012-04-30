@@ -9,6 +9,7 @@
     , "mongoose": "*"
     , "express-messages": "*"
     , "markdown": "*"
+    , "async": "*"
   }
   , "devDependencies": {
       "sinon": "*"

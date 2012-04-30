@@ -26,7 +26,7 @@
   };
 
   exports.add = function(req, res) {
-    return Todos.add(req.body.title, req.body.description, req.body.completed, function(err) {
+    return Todos.add(req.body.title, req.body.description, req.body.completed, req.body.parent, function(err) {
       return res.redirect('/todo');
     });
   };

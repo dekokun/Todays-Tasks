@@ -1,4 +1,5 @@
 mongoose = require 'mongoose'
+async = require 'async'
 
 class Todos
   constructor: (db) ->
@@ -8,26 +9,50 @@ class Todos
         title: String
       , description: String
       , completed: Boolean
-      , default: 0
+      , parent: String
+      , isTop: { type:Boolean, default: false }
     }
 
     mongoose.model 'Todos', @db
     @db = mongoose.model 'Todos'
 
   list: (callback) ->
-    @db.find({}, (err, todos) ->
+    todoSort = (todos) ->
       todos.sort (a,b) ->
         if a.completed
           return 1
         else
           return -1
-      callback(err, todos)
+
+    db = @db
+    db.find({isTop: true}, (err, parents) ->
+      func = []
+      myfunc = (todo) ->
+        (callback) ->
+          db.find({parent: todo._id}, (err, children) ->
+            todoSort(children)
+            todo.todos = children
+            callback(err, todo)
+          )
+      for parent in parents
+        func.push (myfunc parent)
+      async.parallel(func, (err, results)->
+        todoSort(results)
+        callback(err, results)
+      )
     )
 
-  add: (title, description, completed, callback) ->
+  all: (callback) ->
+    @db.find {}, (err, todos) ->
+      callback err, todos
+
+  add: (title, description, completed, parent, callback) ->
+    isTop = true
+    if parent?
+      isTop = false
     if !completed
       completed = false
-    new @db({title: title, description: description, completed: completed}).save (err) ->
+    new @db({title: title, description: description, completed: completed, isTop: isTop, parent: parent}).save (err) ->
       callback err
 
   update: (id, title, description, callback) ->

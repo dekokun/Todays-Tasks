@@ -1,7 +1,9 @@
 (function() {
-  var Todos, mongoose;
+  var Todos, async, mongoose;
 
   mongoose = require('mongoose');
+
+  async = require('async');
 
   Todos = (function() {
 
@@ -11,31 +13,72 @@
         title: String,
         description: String,
         completed: Boolean,
-        "default": 0
+        parent: String,
+        isTop: {
+          type: Boolean,
+          "default": false
+        }
       });
       mongoose.model('Todos', this.db);
       this.db = mongoose.model('Todos');
     }
 
     Todos.prototype.list = function(callback) {
-      return this.db.find({}, function(err, todos) {
-        todos.sort(function(a, b) {
+      var db, todoSort;
+      todoSort = function(todos) {
+        return todos.sort(function(a, b) {
           if (a.completed) {
             return 1;
           } else {
             return -1;
           }
         });
+      };
+      db = this.db;
+      return db.find({
+        isTop: true
+      }, function(err, parents) {
+        var func, myfunc, parent, _i, _len;
+        func = [];
+        myfunc = function(todo) {
+          return function(callback) {
+            return db.find({
+              parent: todo._id
+            }, function(err, children) {
+              todoSort(children);
+              todo.todos = children;
+              return callback(err, todo);
+            });
+          };
+        };
+        for (_i = 0, _len = parents.length; _i < _len; _i++) {
+          parent = parents[_i];
+          func.push(myfunc(parent));
+        }
+        return async.parallel(func, function(err, results) {
+          todoSort(results);
+          return callback(err, results);
+        });
+      });
+    };
+
+    Todos.prototype.all = function(callback) {
+      return this.db.find({}, function(err, todos) {
         return callback(err, todos);
       });
     };
 
-    Todos.prototype.add = function(title, description, completed, callback) {
+    Todos.prototype.add = function(title, description, completed, parent, callback) {
+      var isTop;
+      isTop = true;
+      if (parent != null) isTop = false;
       if (!completed) completed = false;
       return new this.db({
         title: title,
         description: description,
-        completed: completed
+        completed: completed,
+        isTop: isTop,
+        parent: parent
       }).save(function(err) {
         return callback(err);
       });

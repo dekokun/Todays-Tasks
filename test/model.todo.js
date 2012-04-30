@@ -40,7 +40,8 @@
             return new db({
               title: 'hogehogetitle',
               description: 'fugafuga',
-              completed: true
+              completed: true,
+              isTop: true
             }).save(function(err) {
               return done(err);
             });
@@ -69,17 +70,20 @@
             return new db({
               title: 'false',
               description: 'fugafuga',
-              completed: false
+              completed: false,
+              isTop: true
             }).save(function(err) {
               return new db({
                 title: 'hogehogetitle',
                 description: 'fugafuga',
-                completed: true
+                completed: true,
+                isTop: true
               }).save(function(err) {
                 return new db({
                   title: 'nice',
                   description: 'fugafuga',
-                  completed: false
+                  completed: false,
+                  isTop: true
                 }).save(function(err) {
                   return done(err);
                 });
@@ -124,7 +128,7 @@
             return done(err);
           });
         };
-        return Todos.add('hoge', 'fuga', void 0, callback);
+        return Todos.add('hoge', 'fuga', void 0, void 0, callback);
       });
     });
     describe("remove", function() {
