@@ -45,7 +45,6 @@ case $1 in
     ;;
   develop)
     npm update
-    git checkout $DEVELOP_BRANCH || exit 1
     coffee -wc app.coffee &
     coffee -wc routes/ &
     coffee -wc model/ &
