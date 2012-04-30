@@ -7,24 +7,21 @@ li
   - }else{
     submit_value = '完了'
     button_value = true
-      h4= todo.title
+    h4= todo.title
   -}
-      p
-        a(onclick="showHide('"+todo._id+"');return false;", href="#")
-          詳しく
-      div(id=todo._id, style="display: none;")
-        section.markdown!= todo.markdown
-        .form-group
-          form(action='/todo/'+todo._id+'/completeChange', method= 'POST')
-            input(type='hidden', name='_method', value='put')
-            input(type='hidden', name='completed', value="#{button_value}")
-            i.icon-ok
-            input.btn.btn-mini.btn-success(type= 'submit', value="#{submit_value}")
-          form(action='/todo/'+todo._id, method= 'GET')
-            input(type='hidden', name='_method', value='get')
-            i.icon-pencil
-            input.btn.btn-mini.btn-info(type= 'submit', value='編集')
-          form(action='/todo/'+todo._id, method= 'POST')
-            input(type='hidden', name='_method', value='delete')
-            i.icon-trash
-            input.btn.btn-mini.btn-danger(type= 'submit', value='削除')
+    div
+      section.markdown!= todo.markdown
+      .form-group
+        form(action='/todo/'+todo._id+'/completeChange', method= 'POST')
+          input(type='hidden', name='_method', value='put')
+          input(type='hidden', name='completed', value="#{button_value}")
+          i.icon-ok
+          input.btn.btn-mini.btn-success(type= 'submit', value="#{submit_value}")
+        form(action='/todo/'+todo._id, method= 'GET')
+          input(type='hidden', name='_method', value='get')
+          i.icon-pencil
+          input.btn.btn-mini.btn-info(type= 'submit', value='編集')
+        form(action='/todo/'+todo._id, method= 'POST')
+          input(type='hidden', name='_method', value='delete')
+          i.icon-trash
+          input.btn.btn-mini.btn-danger(type= 'submit', value='削除')
