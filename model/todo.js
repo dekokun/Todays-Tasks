@@ -62,12 +62,6 @@
       });
     };
 
-    Todos.prototype.all = function(callback) {
-      return this.db.find({}, function(err, todos) {
-        return callback(err, todos);
-      });
-    };
-
     Todos.prototype.add = function(title, description, completed, parent, callback) {
       var isTop;
       isTop = true;

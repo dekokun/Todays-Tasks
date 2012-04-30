@@ -42,10 +42,6 @@ class Todos
       )
     )
 
-  all: (callback) ->
-    @db.find {}, (err, todos) ->
-      callback err, todos
-
   add: (title, description, completed, parent, callback) ->
     isTop = true
     if parent?
