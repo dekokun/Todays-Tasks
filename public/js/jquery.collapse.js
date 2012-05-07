@@ -139,11 +139,11 @@
     $(function() {
         try {
             $.cookie('x', 'x', { path: '/', expires: 10 });
+            $.cookie('x', null);
         }
         catch(e) {
             cookie = false;
-            $.cookie('x', null);
         }
-    });
+    }());
     var cookieSupport = $.fn.collapse.cookieSupport = cookie;
 })(jQuery);
